@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Contents;
 
+use ICanBoogie\HTTP\ForceRedirect;
+
 use ICanBoogie\ActiveRecord;
 use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\ActiveRecord\RecordNotFound;
@@ -77,6 +79,8 @@ class ViewProvider extends \Icybee\Modules\Nodes\ViewProvider
 	 * none was similar enough.
 	 *
 	 * @throws RecordNotFound if the record could not be rescued.
+	 *
+	 * @todo-20140429 This should be in an exception rescue listener.
 	 */
 	protected function rescue()
 	{
@@ -116,22 +120,11 @@ class ViewProvider extends \Icybee\Modules\Nodes\ViewProvider
 		}
 		else if ($key)
 		{
-			# FIXME-20130310: We MUST throw an exception !
-
 			$record = $model[$key];
 
 			\ICanBoogie\log('The record %title was rescued!', array('title' => $record->title));
 
-			header('HTTP/1.1 301 Moved Permanently');
-			header('Location: ' . $record->url);
-
-			exit;
-
-			/*
-			//TODO-20120109: should we redirect to the correct record URL ?
-
-			return $record;
-			*/
+			throw new ForceRedirect($record->url, 301);
 		}
 	}
 }
