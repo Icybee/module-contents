@@ -265,21 +265,21 @@ class Content extends \Icybee\Modules\Nodes\Node
 	/**
 	 * Returns the month of the date.
 	 *
-	 * @return string
+	 * @return string A padded string e.g. "02";
 	 */
 	protected function volatile_get_month()
 	{
-		return $this->volatile_get_date()->month;
+		return $this->volatile_get_date()->format('m');
 	}
 
 	/**
 	 * Returns the day of the date.
 	 *
-	 * @return string
+	 * @return string A padded string e.g. "02";
 	 */
 	protected function volatile_get_day()
 	{
-		return $this->volatile_get_date()->day;
+		return $this->volatile_get_date()->format('d');
 	}
 
 	/**

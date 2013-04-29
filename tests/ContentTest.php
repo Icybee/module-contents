@@ -102,7 +102,10 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 	public function test_get_month()
 	{
 		$r = Content::from(array('date' => '2013-12-11'));
-		$this->assertEquals(12, $r->month);
+		$this->assertSame('12', $r->month);
+
+		$r = Content::from(array('date' => '2013-01-11'));
+		$this->assertSame('01', $r->month);
 	}
 
 	/**
@@ -117,7 +120,10 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 	public function test_get_day()
 	{
 		$r = Content::from(array('date' => '2013-12-11'));
-		$this->assertEquals(11, $r->day);
+		$this->assertSame('11', $r->day);
+
+		$r = Content::from(array('date' => '2013-12-01'));
+		$this->assertSame('01', $r->day);
 	}
 
 	/**
