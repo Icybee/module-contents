@@ -4,7 +4,7 @@ document.body.addEvent('click:relay(#manager td.cell--is-home-excluded .trigger)
 
 	new Request.API({
 
-		url: el.getParent('form').elements['#destination'].value + '/' + el.get('data-nid') + '/is-home-excluded',
+		url: el.getParent('form').elements[ICanBoogie.Operation.DESTINATION].value + '/' + el.get('data-nid') + '/is-home-excluded',
 
 		onFailure: function(response) {
 
