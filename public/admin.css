@@ -1,0 +1,17 @@
+#manager .cell--is-home-excluded {
+	width: 20px;
+}
+
+#manager td.cell--is-home-excluded {
+	text-align: center;
+}
+
+#manager td.cell--is-home-excluded .trigger {
+	cursor: default;
+	font-size: 18px;
+	vertical-align: middle;
+}
+
+#manager td.cell--is-home-excluded .trigger.on {
+	opacity: .3;
+}

@@ -26,7 +26,7 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 			(
 				self::T_COLUMNS_ORDER => array
 				(
-					'title', 'is_home_excluded', 'is_online', 'uid', 'date', 'modified'
+					'title', 'url', 'is_home_excluded', 'is_online', 'uid', 'date', 'modified'
 				),
 
 				self::T_ORDER_BY => array('date', 'desc')
@@ -38,8 +38,8 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 	{
 		parent::add_assets($document);
 
-		$document->css->add('manage.css');
-		$document->js->add('manage.js');
+		$document->css->add(DIR . 'public/admin.css');
+		$document->js->add(DIR . 'public/admin.js');
 	}
 
 	protected function columns()
@@ -53,15 +53,23 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 
 			'is_home_excluded' => array
 			(
-				'label' => null
+				'label' => null,
+				'filters' => array
+				(
+					'options' => array
+					(
+						'=1' => "Excluded from home",
+						'=0' => "Included in home"
+					)
+				),
+
+				'sortable' => false
 			)
 		);
 	}
 
 	/**
 	 * Updates filters with the `is_home_excluded` filter.
-	 *
-	 * @see Icybee\Manager.Nodes::update_filters()
 	 */
 	protected function update_filters(array $filters, array $modifiers)
 	{
@@ -86,8 +94,6 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 
 	/**
 	 * Alters query with the `is_home_excluded` filter.
-	 *
-	 * @see Icybee\Manager.Nodes::alter_query()
 	 */
 	protected function alter_query(Query $query, array $filters)
 	{
@@ -100,33 +106,6 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 	}
 
 	/**
-	 * Returns options for the `is_home_excluded` header cell.
-	 *
-	 * @param array $options
-	 * @param string $id
-	 *
-	 * @return array
-	 */
-	protected function extend_column_is_home_excluded(array $options, $id, array $fields)
-	{
-		return array
-		(
-			'filters' => array
-			(
-				'options' => array
-				(
-					'=1' => "Exclus de l'accueil",
-					'=0' => "Inclus à l'accueil"
-				)
-			),
-
-			'sortable' => false
-		)
-
-		+ parent::extend_column($options, $id, $fields);
-	}
-
-	/**
 	 * Renders a cell of the `is_home_excluded` column.
 	 *
 	 * @param ActiveRecord $record
@@ -136,23 +115,11 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 	{
 		return new Element
 		(
-			'label', array
+			'i', array
 			(
-				Element::CHILDREN => array
-				(
-					new Element
-					(
-						Element::TYPE_CHECKBOX, array
-						(
-							'value' => $record->nid,
-							'checked' => ($record->$property != 0),
-							'data-property' => $property
-						)
-					)
-				),
-
-				'title' => "Inclure ou exclure l'entrée de la page d'accueil",
-				'class' => 'checkbox-wrapper home'
+				'class' => 'icon-home trigger ' . ($record->$property ? 'on' : ''),
+				'data-nid' => $record->nid,
+				'title' => "Include or exclude the record from the view 'home'"
 			)
 		);
 	}
