@@ -22,10 +22,9 @@ return array
 		'use_multi_editor' => "Allow the user to change the editor",
 	),
 
-	'manager.label' => array
+	'contents.manage.column' => array
 	(
-		'date' => 'Date',
-		'category' => 'Category'
+		'date' => 'Date'
 	),
 
 	'module_category.contents' => 'Contents',

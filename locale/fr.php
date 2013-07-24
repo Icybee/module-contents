@@ -22,11 +22,6 @@ return array
 		'use_multi_editor' => "Permettre à l'utilisateur de changer d'éditeur",
 	),
 
-	'manager.label' => array
-	(
-		'category' => 'Catégorie'
-	),
-
 	'module_category.contents' => 'Contenu',
 	'module_title.contents' => 'Contenus',
 

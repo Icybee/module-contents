@@ -11,13 +11,16 @@
 
 namespace Icybee\Modules\Contents;
 
-use ICanBoogie\ActiveRecord;
-use ICanBoogie\ActiveRecord\Query;
-
-use Brickrouge\Element;
-
 class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 {
+	static protected function add_assets(\Brickrouge\Document $document)
+	{
+		parent::add_assets($document);
+
+		$document->css->add(DIR . 'public/admin.css');
+		$document->js->add(DIR . 'public/admin.js');
+	}
+
 	public function __construct(Module $module, array $attributes=array())
 	{
 		parent::__construct
@@ -34,26 +37,39 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 		);
 	}
 
-	static protected function add_assets(\Brickrouge\Document $document)
+	/**
+	 * Adds the following columns:
+	 *
+	 * - `date`: An instance of {@link \Icybee\ManageBlock\DateColumn}.
+	 * - `is_home_excluded`: An instance of {@link ManageBlock\IsHomeExcludedColumn}.
+	 *
+	 * @return array
+	 */
+	protected function get_available_columns()
 	{
-		parent::add_assets($document);
-
-		$document->css->add(DIR . 'public/admin.css');
-		$document->js->add(DIR . 'public/admin.js');
-	}
-
-	protected function columns()
-	{
-		return parent::columns() + array
+		return array_merge(parent::get_available_columns(), array
 		(
-			'date' => array
-			(
-				'class' => 'date'
-			),
+			'date' => 'Icybee\ManageBlock\DateColumn',
+			'is_home_excluded' => __CLASS__ . '\IsHomeExcludedColumn'
+		));
+	}
+}
 
-			'is_home_excluded' => array
+namespace Icybee\Modules\Contents\ManageBlock;
+
+use Brickrouge\Element;
+
+/**
+ * Representation of the `is_home_excluded` column.
+ */
+class IsHomeExcludedColumn extends \Icybee\ManageBlock\BooleanColumn
+{
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=array())
+	{
+		parent::__construct
+		(
+			$manager, $id, $options + array
 			(
-				'label' => null,
 				'filters' => array
 				(
 					'options' => array
@@ -63,55 +79,23 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 					)
 				),
 
-				'sortable' => false
+				'cell_renderer' => __NAMESPACE__ . '\IsHomeExcludedCellRenderer'
 			)
 		);
 	}
+}
 
+/**
+ * Renderer for the `is_home_excluded` column cell.
+ */
+class IsHomeExcludedCellRenderer extends \Icybee\ManageBlock\BooleanCellRenderer
+{
 	/**
-	 * Updates filters with the `is_home_excluded` filter.
-	 */
-	protected function update_filters(array $filters, array $modifiers)
-	{
-		$filters = parent::update_filters($filters, $modifiers);
-
-		if (isset($modifiers['is_home_excluded']))
-		{
-			$value = $modifiers['is_home_excluded'];
-
-			if ($value === '' || $value === null)
-			{
-				unset($filters['is_home_excluded']);
-			}
-			else
-			{
-				$filters['is_home_excluded'] = !empty($value);
-			}
-		}
-
-		return $filters;
-	}
-
-	/**
-	 * Alters query with the `is_home_excluded` filter.
-	 */
-	protected function alter_query(Query $query, array $filters)
-	{
-		if (isset($filters['is_home_excluded']))
-		{
-			$query->where('is_home_excluded = ?', $filters['is_home_excluded']);
-		}
-
-		return parent::alter_query($query, $filters);
-	}
-
-	/**
-	 * Renders a cell of the `is_home_excluded` column.
+	 * Returns a _boolean_ element representing a little house.
 	 *
-	 * @param ActiveRecord $record
-	 * @param string $property
+	 * @return \Brickrouge\Element
 	 */
-	protected function render_cell_is_home_excluded(ActiveRecord $record, $property)
+	public function __invoke($record, $property)
 	{
 		return new Element
 		(
