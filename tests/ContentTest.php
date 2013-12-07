@@ -16,6 +16,45 @@ use ICanBoogie\DateTime;
 class ContentTest extends \PHPUnit_Framework_TestCase
 {
 	/**
+	 * @dataProvider provide_test_readonly_properties
+	 * @expectedException ICanBoogie\PropertyNotWritable
+	 * @param string $property Property name.
+	 */
+	public function test_readonly_properties($property)
+	{
+		Content::from()->$property = null;
+	}
+
+	public function provide_test_readonly_properties()
+	{
+		$properties = 'year month day';
+
+		return array_map(function($v) { return (array) $v; }, explode(' ', $properties));
+	}
+
+	/**
+	 * @dataProvider provide_test_get_property
+	 */
+	public function test_get_property($property, $fixture, $expected)
+	{
+		$this->assertSame($expected, Content::from($fixture)->$property);
+	}
+
+	public function provide_test_get_property()
+	{
+		global $core;
+
+		return array
+		(
+			array('year', array('date' => '2013-12-11'), 2013),
+			array('month', array('date' => '2013-12-11'), '12'),
+			array('month', array('date' => '2013-01-11'), '01'),
+			array('day', array('date' => '2013-12-11'), '11'),
+			array('day', array('date' => '2013-12-01'), '01')
+		);
+	}
+
+	/**
 	 * Checks that the defined excerpt is returned and not created from the body, and that the
 	 * excerpt is exported by {@link Node::to_array()} and `__sleep`.
 	 */
@@ -82,56 +121,5 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 		$this->assertArrayHasKey('date', $properties);
 		$array = $r->to_array();
 		$this->assertArrayHasKey('date', $array);
-	}
-
-	public function test_get_year()
-	{
-		$r = Content::from(array('date' => '2013-12-11'));
-		$this->assertEquals(2013, $r->year);
-	}
-
-	/**
-	 * @expectedException ICanBoogie\PropertyNotWritable
-	 */
-	public function test_set_year()
-	{
-		$r = Content::from(array('date' => '2013-12-11'));
-		$r->year = true;
-	}
-
-	public function test_get_month()
-	{
-		$r = Content::from(array('date' => '2013-12-11'));
-		$this->assertSame('12', $r->month);
-
-		$r = Content::from(array('date' => '2013-01-11'));
-		$this->assertSame('01', $r->month);
-	}
-
-	/**
-	 * @expectedException ICanBoogie\PropertyNotWritable
-	 */
-	public function test_set_month()
-	{
-		$r = Content::from(array('date' => '2013-12-11'));
-		$r->month = true;
-	}
-
-	public function test_get_day()
-	{
-		$r = Content::from(array('date' => '2013-12-11'));
-		$this->assertSame('11', $r->day);
-
-		$r = Content::from(array('date' => '2013-12-01'));
-		$this->assertSame('01', $r->day);
-	}
-
-	/**
-	 * @expectedException ICanBoogie\PropertyNotWritable
-	 */
-	public function test_set_day()
-	{
-		$r = Content::from(array('date' => '2013-12-11'));
-		$r->day = true;
 	}
 }

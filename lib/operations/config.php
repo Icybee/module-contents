@@ -17,9 +17,9 @@ namespace Icybee\Modules\Contents;
  */
 class ConfigOperation extends \Icybee\Modules\Nodes\ConfigOperation
 {
-	protected function get_properties()
+	protected function lazy_get_properties()
 	{
-		$properties = parent::get_properties();
+		$properties = parent::lazy_get_properties();
 
 		$properties['local'] += array
 		(

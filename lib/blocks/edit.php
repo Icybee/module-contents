@@ -19,9 +19,9 @@ use Icybee\Modules\Editor\MultiEditorElement;
 
 class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 {
-	protected function get_attributes()
+	protected function lazy_get_attributes()
 	{
-		$attributes = parent::get_attributes();
+		$attributes = parent::lazy_get_attributes();
 
 		$attributes[Element::GROUPS] = array_merge
 		(
@@ -42,7 +42,7 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 		return $attributes;
 	}
 
-	protected function get_children()
+	protected function lazy_get_children()
 	{
 		global $core;
 
@@ -64,7 +64,7 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 
 		return array_merge
 		(
-			parent::get_children(), array
+			parent::lazy_get_children(), array
 			(
 				Content::SUBTITLE => new Text
 				(
@@ -121,11 +121,11 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 		);
 	}
 
-	protected function get_values()
+	protected function lazy_get_values()
 	{
 		global $core;
 
-		$values = parent::get_values();
+		$values = parent::lazy_get_values();
 
 		if (isset($values['editor']) && isset($values['body']))
 		{

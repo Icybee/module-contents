@@ -64,7 +64,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 *
 	 * @return string
 	 */
-	protected function volatile_get_excerpt()
+	protected function get_excerpt()
 	{
 		return \ICanBoogie\excerpt((string) $this);
 	}
@@ -81,7 +81,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 *
 	 * @return \ICanBoogie\DateTime
 	 */
-	protected function volatile_get_date()
+	protected function get_date()
 	{
 		$date = $this->date;
 
@@ -98,7 +98,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 *
 	 * @param mixed $value
 	 */
-	protected function volatile_set_date($value)
+	protected function set_date($value)
 	{
 		$this->date = $value;
 	}
@@ -229,7 +229,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	{
 		return parent::to_array() + array
 		(
-			'date' => $this->volatile_get_date()
+			'date' => $this->get_date() // TODO-20131207: this is not necessary with newer prototype versions
 		);
 	}
 
@@ -257,9 +257,9 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 *
 	 * @return string
 	 */
-	protected function volatile_get_year()
+	protected function get_year()
 	{
-		return $this->volatile_get_date()->year;
+		return $this->get_date()->year;
 	}
 
 	/**
@@ -267,9 +267,9 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 *
 	 * @return string A padded string e.g. "02";
 	 */
-	protected function volatile_get_month()
+	protected function get_month()
 	{
-		return $this->volatile_get_date()->format('m');
+		return $this->get_date()->format('m');
 	}
 
 	/**
@@ -277,15 +277,15 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 *
 	 * @return string A padded string e.g. "02";
 	 */
-	protected function volatile_get_day()
+	protected function get_day()
 	{
-		return $this->volatile_get_date()->format('d');
+		return $this->get_date()->format('d');
 	}
 
 	/**
 	 * Overrides the method to support the `date` property.
 	 */
-	protected function get_previous()
+	protected function lazy_get_previous()
 	{
 		$ids = $this->model->select('nid')->order('date, created, nid')->own->visible->all(\PDO::FETCH_COLUMN);
 		$key = array_search($this->nid, $ids);
@@ -296,7 +296,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	/**
 	 * Overrides the method to support the `date` property.
 	 */
-	protected function get_next()
+	protected function lazy_get_next()
 	{
 		$ids = $this->model->select('nid')->order('date, created, nid')->own->visible->all(\PDO::FETCH_COLUMN);
 		$key = array_search($this->nid, $ids);

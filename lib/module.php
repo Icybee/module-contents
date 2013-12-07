@@ -19,7 +19,7 @@ class Module extends \Icybee\Modules\Nodes\Module
 	/**
 	 * Overrides the "view", "list" and "home" views to provide different providers.
 	 */
-	protected function get_views()
+	protected function lazy_get_views()
 	{
 		$options = array
 		(
@@ -33,7 +33,7 @@ class Module extends \Icybee\Modules\Nodes\Module
 
 		return \ICanBoogie\array_merge_recursive
 		(
-			parent::get_views(), array
+			parent::lazy_get_views(), array
 			(
 				'view' => $options,
 				'list' => $options,

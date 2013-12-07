@@ -20,9 +20,9 @@ use Brickrouge\Text;
  */
 class ConfigBlock extends \Icybee\ConfigBlock
 {
-	protected function get_attributes()
+	protected function lazy_get_attributes()
 	{
-		$attributes = parent::get_attributes();
+		$attributes = parent::lazy_get_attributes();
 
 		$attributes[Element::GROUPS]['limits'] = array
 		(
@@ -32,13 +32,13 @@ class ConfigBlock extends \Icybee\ConfigBlock
 		return $attributes;
 	}
 
-	protected function get_children()
+	protected function lazy_get_children()
 	{
 		$ns = $this->module->flat_id;
 
 		return array_merge
 		(
-			parent::get_children(), array
+			parent::lazy_get_children(), array
 			(
 				"local[$ns.default_editor]" => new Text
 				(

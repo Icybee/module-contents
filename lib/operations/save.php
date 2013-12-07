@@ -19,11 +19,11 @@ class SaveOperation extends \Icybee\Modules\Nodes\SaveOperation
 	/**
 	 * Serialize the `body` property using its editor.
 	 */
-	protected function get_properties()
+	protected function lazy_get_properties()
 	{
 		global $core;
 
-		$properties = parent::get_properties();
+		$properties = parent::lazy_get_properties();
 
 		if (isset($properties['body']) && isset($properties['editor']))
 		{
