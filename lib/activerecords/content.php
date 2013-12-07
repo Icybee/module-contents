@@ -17,13 +17,18 @@ use ICanBoogie\PropertyNotWritable;
 /**
  * Representation of a content.
  *
- * The _content_ extends the _node_ with the following properties:
+ * The {@link Content} class extends the {@link \Icybee\Modules\Nodes\Node} class with the
+ * following properties:
  *
- * - an optional subtitle
- * - a body (with a customizable editor)
- * - an optional excerpt, that can be generated from the body if it is not defined.
- * - a date
- * - an additionnal visibility option.
+ * - {@link $subtitle}: An optional subtitle.
+ * - {@link $body}: A body (with a customizable editor).
+ * - {@link $excerpt}: An optional excerpt, that can be generated from the body if it is not
+ * defined.
+ * - {@link $date}: The date of the content.
+ * - {@link $editor}: The editor used to edit the body of the content.
+ * - {@link $is_home_excluded}: An additionnal visibility option.
+ *
+ * @property \ICanBoogie\DateTime $date The date of the content.
  */
 class Content extends \Icybee\Modules\Nodes\Node
 {
@@ -83,14 +88,14 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 */
 	protected function get_date()
 	{
-		$date = $this->date;
+		$value = $this->date;
 
-		if ($date instanceof DateTime)
+		if ($value instanceof DateTime)
 		{
-			return $date;
+			return $value;
 		}
 
-		return $this->date = $date === null ? DateTime::none() : new DateTime($date, 'utc');
+		return $this->date = $value === null ? DateTime::none() : new DateTime($value, 'utc');
 	}
 
 	/**
@@ -118,27 +123,28 @@ class Content extends \Icybee\Modules\Nodes\Node
 	public $is_home_excluded;
 
 	/**
-	 * The {@link $excerpt} property is unset if it is empty, so that it is created from the body
-	 * when read for the first time.
+	 * The {@link $excerpt} property is unset if it is empty, until it is defined again, the
+	 * {@link get_excerpt()} getter provides a default value made from the {@link $body}
+	 * property.
 	 *
 	 * @param Model|string $model Defaults to "contents".
 	 */
 	public function __construct($model='contents')
 	{
-		parent::__construct($model);
-
 		if (empty($this->excerpt))
 		{
 			unset($this->excerpt);
 		}
+
+		parent::__construct($model);
 	}
 
 	/**
 	 * @var bool|null true is the cache should be used, false if the cache should not be used, and
 	 * null if we don't yet know if the cache should be used or not.
 	 */
-	private static $use_cache;
-	private static $cache_model;
+	static private $use_cache;
+	static private $cache_model;
 
 	private $rendered_body;
 
@@ -223,17 +229,6 @@ class Content extends \Icybee\Modules\Nodes\Node
 	}
 
 	/**
-	 * Adds the {@link $date} property.
-	 */
-	public function to_array()
-	{
-		return parent::to_array() + array
-		(
-			'date' => $this->get_date() // TODO-20131207: this is not necessary with newer prototype versions
-		);
-	}
-
-	/**
 	 * Renders the body using the associated editor.
 	 *
 	 * @return string
@@ -304,6 +299,16 @@ class Content extends \Icybee\Modules\Nodes\Node
 		return $key < count($ids) - 1 ? $this->model[$ids[$key + 1]] : null;
 	}
 
+	/**
+	 * Returns an excerpt of the content.
+	 *
+	 * If the {@link $excerpt} property is not empty the excerpt is created from it, otherwise it
+	 * is created from the {@link $body}.
+	 *
+	 * @param number $limit The number of words desired.
+	 *
+	 * @return string
+	 */
 	public function excerpt($limit=55)
 	{
 		return isset($this->excerpt) ? \ICanBoogie\excerpt($this->excerpt, $limit) : \ICanBoogie\excerpt((string) $this, $limit);
