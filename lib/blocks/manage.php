@@ -29,7 +29,7 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 			(
 				self::T_COLUMNS_ORDER => array
 				(
-					'title', 'url', 'is_home_excluded', 'is_online', 'uid', 'date', 'modified'
+					'title', 'url', 'is_home_excluded', 'is_online', 'uid', 'date', 'updated_at'
 				),
 
 				self::T_ORDER_BY => array('date', 'desc')

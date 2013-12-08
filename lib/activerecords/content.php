@@ -185,8 +185,8 @@ class Content extends \Icybee\Modules\Nodes\Node
 				}
 
 				$nid = $this->nid;
-				$modified = $this->modified;
-				$cached = self::$cache_model->select('body')->filter_by_nid_and_timestamp($nid, $modified)->rc;
+				$updated_at = $this->updated_at;
+				$cached = self::$cache_model->select('body')->filter_by_nid_and_timestamp($nid, $updated_at)->rc;
 
 				if ($cached)
 				{
@@ -205,7 +205,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 						array
 						(
 							'nid' => $nid,
-							'timestamp' => $modified,
+							'timestamp' => $updated_at,
 							'body' => $rendered_body
 						),
 
@@ -282,7 +282,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 */
 	protected function lazy_get_previous()
 	{
-		$ids = $this->model->select('nid')->order('date, created, nid')->own->visible->all(\PDO::FETCH_COLUMN);
+		$ids = $this->model->select('nid')->order('date, created_at, nid')->own->visible->all(\PDO::FETCH_COLUMN);
 		$key = array_search($this->nid, $ids);
 
 		return $key ? $this->model[$ids[$key - 1]] : null;
@@ -293,7 +293,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 */
 	protected function lazy_get_next()
 	{
-		$ids = $this->model->select('nid')->order('date, created, nid')->own->visible->all(\PDO::FETCH_COLUMN);
+		$ids = $this->model->select('nid')->order('date, created_at, nid')->own->visible->all(\PDO::FETCH_COLUMN);
 		$key = array_search($this->nid, $ids);
 
 		return $key < count($ids) - 1 ? $this->model[$ids[$key + 1]] : null;

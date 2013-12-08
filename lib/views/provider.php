@@ -36,7 +36,7 @@ class ViewProvider extends \Icybee\Modules\Nodes\ViewProvider
 
 	/**
 	 * Support for the `year`, `month` and `day` conditions. Changes the order to
-	 * `date DESC, created DESC`.
+	 * `date DESC, created_at DESC`.
 	 *
 	 * If the view is of type "home" the query is altered to search for nodes which are not
 	 * excluded from _home_.
@@ -66,7 +66,7 @@ class ViewProvider extends \Icybee\Modules\Nodes\ViewProvider
 			$query->where('is_home_excluded = 0');
 		}
 
-		return parent::alter_query($query, $conditions)->order('date DESC, created DESC');
+		return parent::alter_query($query, $conditions)->order('date DESC, created_at DESC');
 	}
 
 	/**
