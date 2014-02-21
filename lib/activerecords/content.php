@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Contents;
 
+use ICanBoogie\ActiveRecord\DateTimePropertySupport;
 use ICanBoogie\DateTime;
 use ICanBoogie\PropertyNotWritable;
 
@@ -74,39 +75,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 		return \ICanBoogie\excerpt((string) $this);
 	}
 
-	/**
-	 * Date of the content.
-	 *
-	 * @var string
-	 */
-	private $date;
-
-	/**
-	 * Returns the date of the content.
-	 *
-	 * @return \ICanBoogie\DateTime
-	 */
-	protected function get_date()
-	{
-		$value = $this->date;
-
-		if ($value instanceof DateTime)
-		{
-			return $value;
-		}
-
-		return $this->date = $value === null ? DateTime::none() : new DateTime($value, 'utc');
-	}
-
-	/**
-	 * Sets the {@link $date} property.
-	 *
-	 * @param mixed $value
-	 */
-	protected function set_date($value)
-	{
-		$this->date = $value;
-	}
+	use DateProperty;
 
 	/**
 	 * The identifier of the editor that was used to edit the body.
@@ -312,5 +281,40 @@ class Content extends \Icybee\Modules\Nodes\Node
 	public function excerpt($limit=55)
 	{
 		return isset($this->excerpt) ? \ICanBoogie\excerpt($this->excerpt, $limit) : \ICanBoogie\excerpt((string) $this, $limit);
+	}
+}
+
+/**
+ * Implements the`date` property.
+ *
+ * @property \ICanBoogie\DateTime $date The date of the record.
+ */
+trait DateProperty
+{
+	/**
+	 * The date of the record.
+	 *
+	 * @var mixed
+	 */
+	private $date;
+
+	/**
+	 * Returns the date of the record.
+	 *
+	 * @return \ICanBoogie\DateTime
+	 */
+	protected function get_date()
+	{
+		return DateTimePropertySupport::datetime_get($this->date);
+	}
+
+	/**
+	 * Sets the date of the record.
+	 *
+	 * @param mixed $datetime
+	 */
+	protected function set_date($datetime)
+	{
+		DateTimePropertySupport::datetime_set($this->date, $datetime);
 	}
 }

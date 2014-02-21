@@ -1,4 +1,4 @@
-# The Contents module [![Build Status](https://travis-ci.org/Icybee/module-contents.png?branch=master)](https://travis-ci.org/Icybee/module-contents)
+# The Contents module [![Build Status](https://travis-ci.org/Icybee/module-contents.png?branch=2.0)](https://travis-ci.org/Icybee/module-contents)
 
 The Contents module (`contents`) is the base module for content nodes such as articles or
 news. If extends nodes with a body, an excerpt, a subtitle, a date and an additionnal visibility
@@ -13,7 +13,7 @@ module that allows the user to control the cache.
 
 ## Requirement
 
-The package requires PHP 5.3 or later.
+The package requires PHP 5.4 or later.
 
 
 
@@ -29,7 +29,7 @@ Create a `composer.json` file and run `php composer.phar install` command to ins
 	"minimum-stability": "dev",
 	"require":
 	{
-		"icybee/module-contents": "*"
+		"icybee/module-contents": "2.x"
 	}
 }
 ```
@@ -56,7 +56,7 @@ cloned with the following command line:
 The package is documented as part of the [Icybee](http://icybee.org/) CMS
 [documentation](http://icybee.org/docs/). The documentation for the package and its
 dependencies can be generated with the `make doc` command. The documentation is generated in
-the `docs` directory using [ApiGen](http://apigen.org/). The package directory can later by
+the `docs` directory using [ApiGen](http://apigen.org/). The package directory can later be
 cleaned with the `make clean` command.
 
 
@@ -71,7 +71,7 @@ directory can later be cleaned with the `make clean` command.
 
 The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
-[![Build Status](https://travis-ci.org/Icybee/module-contents.png?branch=master)](https://travis-ci.org/Icybee/module-contents)
+[![Build Status](https://travis-ci.org/Icybee/module-contents.png?branch=2.0)](https://travis-ci.org/Icybee/module-contents)
 
 
 
