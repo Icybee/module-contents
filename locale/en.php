@@ -1,18 +1,18 @@
 <?php
 
-return array
-(
-	'description' => array
-	(
+return [
+
+	'description' => [
+
 		'is_home_excluded' => "When the box is checked, the record does not appear on the home
 		page. Wheter the box is checked or not, the record still appears in the listing page.",
 
 		'excerpt' => "The excerpt presents the content in a few words. You can edit your own
 		excerpt or let the system create one for you."
-	),
+	],
 
-	'label' => array
-	(
+	'label' => [
+
 		'default_editor' => 'Default editor',
 		'excerpt' => 'Excerpt',
 		'is_home_excluded' => "Don't display on the home page",
@@ -20,18 +20,18 @@ return array
 		'limits_list' => "Limit for number of records on the listing page",
 		'subtitle' => 'Subtitle',
 		'use_multi_editor' => "Allow the user to change the editor",
-	),
+	],
 
-	'contents.manage.column' => array
-	(
+	'contents.manage.column' => [
+
 		'date' => 'Date'
-	),
+	],
 
 	'module_category.contents' => 'Contents',
 	'module_title.contents' => 'Contents',
 
-	'group.legend' => array
-	(
+	'group.legend' => [
+
 		'limits' => 'Limits'
-	)
-);
+	]
+];

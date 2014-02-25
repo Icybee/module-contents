@@ -55,7 +55,7 @@ class CacheManager implements \Icybee\Modules\Cache\CacheManagerInterface
 
 		list($count, $size) = $model->select('COUNT(nid) count, SUM(LENGTH(body)) size')->one(\PDO::FETCH_NUM);
 
-		return array((int) $count, I18n\t(':count records<br /><span class="small">:size</span>', array(':count' => (int) $count, 'size' => \ICanBoogie\I18n\format_size($size))));
+		return [ (int) $count, I18n\t(':count records<br /><span class="small">:size</span>', [ ':count' => (int) $count, 'size' => \ICanBoogie\I18n\format_size($size) ]) ];
 	}
 
 	function clear()

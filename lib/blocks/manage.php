@@ -21,19 +21,19 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 		$document->js->add(DIR . 'public/admin.js');
 	}
 
-	public function __construct(Module $module, array $attributes=array())
+	public function __construct(Module $module, array $attributes=[])
 	{
 		parent::__construct
 		(
-			$module, $attributes + array
-			(
-				self::T_COLUMNS_ORDER => array
-				(
-					'title', 'url', 'is_home_excluded', 'is_online', 'uid', 'date', 'updated_at'
-				),
+			$module, $attributes + [
 
-				self::T_ORDER_BY => array('date', 'desc')
-			)
+				self::T_COLUMNS_ORDER => [
+
+					'title', 'url', 'is_home_excluded', 'is_online', 'uid', 'date', 'updated_at'
+				],
+
+				self::T_ORDER_BY => [ 'date', 'desc' ]
+			]
 		);
 	}
 
@@ -47,11 +47,11 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 	 */
 	protected function get_available_columns()
 	{
-		return array_merge(parent::get_available_columns(), array
-		(
+		return array_merge(parent::get_available_columns(), [
+
 			'date' => 'Icybee\ManageBlock\DateColumn',
 			'is_home_excluded' => __CLASS__ . '\IsHomeExcludedColumn'
-		));
+		]);
 	}
 }
 
@@ -64,23 +64,23 @@ use Brickrouge\Element;
  */
 class IsHomeExcludedColumn extends \Icybee\ManageBlock\BooleanColumn
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=array())
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
 	{
 		parent::__construct
 		(
-			$manager, $id, $options + array
-			(
-				'filters' => array
-				(
-					'options' => array
-					(
+			$manager, $id, $options + [
+
+				'filters' => [
+
+					'options' => [
+
 						'=1' => "Excluded from home",
 						'=0' => "Included in home"
-					)
-				),
+					]
+				],
 
 				'cell_renderer' => __NAMESPACE__ . '\IsHomeExcludedCellRenderer'
-			)
+			]
 		);
 	}
 }
@@ -97,14 +97,11 @@ class IsHomeExcludedCellRenderer extends \Icybee\ManageBlock\BooleanCellRenderer
 	 */
 	public function __invoke($record, $property)
 	{
-		return new Element
-		(
-			'i', array
-			(
-				'class' => 'icon-home trigger ' . ($record->$property ? 'on' : ''),
-				'data-nid' => $record->nid,
-				'title' => "Include or exclude the record from the view 'home'"
-			)
-		);
+		return new Element('i', [
+
+			'class' => 'icon-home trigger ' . ($record->$property ? 'on' : ''),
+			'data-nid' => $record->nid,
+			'title' => "Include or exclude the record from the view 'home'"
+		]);
 	}
 }

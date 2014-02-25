@@ -5,49 +5,49 @@ namespace Icybee\Modules\Contents;
 use ICanBoogie\ActiveRecord\Model;
 use ICanBoogie\Module;
 
-return array
-(
+return [
+
 	Module::T_CATEGORY => 'contents',
 	Module::T_DESCRIPTION => 'Base module for content nodes such as articles or news.',
 	Module::T_EXTENDS => 'nodes',
 
-	Module::T_MODELS => array
-	(
-		'primary' => array
-		(
+	Module::T_MODELS => [
+
+		'primary' => [
+
 			Model::T_EXTENDS => 'nodes',
-			Model::T_SCHEMA => array
-			(
-				'fields' => array
-				(
+			Model::T_SCHEMA => [
+
+				'fields' => [
+
 					'subtitle' => 'varchar',
 					'body' => 'text',
 					'excerpt' => 'text',
 					'date'=> 'datetime',
-					'editor' => array('varchar', 32),
-					'is_home_excluded' => array('boolean', 'indexed' => true)
-				)
-			)
-		),
+					'editor' => [ 'varchar', 32 ],
+					'is_home_excluded' => [ 'boolean', 'indexed' => true ]
+				]
+			]
+		],
 
-		'cache' => array
-		(
+		'cache' => [
+
 			Model::ACTIVERECORD_CLASS => 'ICanBoogie\ActiveRecord',
 			Model::CLASSNAME => 'ICanBoogie\ActiveRecord\Model',
 			Model::CONNECTION => 'local',
-			Model::SCHEMA => array
-			(
-				'fields' => array
-				(
-					'nid' => array('foreign', 'primary' => true),
+			Model::SCHEMA => [
+
+				'fields' => [
+
+					'nid' => [ 'foreign', 'primary' => true ],
 					'timestamp' => 'timestamp',
 					'body' => 'text'
-				)
-			)
-		)
-	),
+				]
+			]
+		]
+	],
 
 	Module::T_NAMESPACE => __NAMESPACE__,
 	Module::T_REQUIRED => true,
 	Module::T_TITLE => 'Contents'
-);
+];

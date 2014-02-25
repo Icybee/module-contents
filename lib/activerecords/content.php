@@ -171,14 +171,13 @@ class Content extends \Icybee\Modules\Nodes\Node
 				{
 					self::$cache_model->save
 					(
-						array
-						(
+						[
 							'nid' => $nid,
 							'timestamp' => $updated_at,
 							'body' => $rendered_body
-						),
+						],
 
-						null, array('on duplicate' => true)
+						null, [ 'on duplicate' => true ]
 					);
 				}
 			}

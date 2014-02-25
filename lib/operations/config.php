@@ -21,10 +21,10 @@ class ConfigOperation extends \Icybee\Modules\Nodes\ConfigOperation
 	{
 		$properties = parent::lazy_get_properties();
 
-		$properties['local'] += array
-		(
+		$properties['local'] += [
+
 			"{$this->module->flat_id}.use_multi_editor" => false
-		);
+		];
 
 		return $properties;
 	}

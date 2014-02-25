@@ -46,7 +46,7 @@ class Hooks
 
 		$core->models['contents']->execute
 		(
-			'UPDATE {self} SET `body` = REPLACE(`body`, ?, ?)', array($event->from, $event->to)
+			'UPDATE {self} SET `body` = REPLACE(`body`, ?, ?)', [ $event->from, $event->to ]
 		);
 	}
 }

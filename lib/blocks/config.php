@@ -24,10 +24,7 @@ class ConfigBlock extends \Icybee\ConfigBlock
 	{
 		$attributes = parent::lazy_get_attributes();
 
-		$attributes[Element::GROUPS]['limits'] = array
-		(
-			'title' => 'limits'
-		);
+		$attributes[Element::GROUPS]['limits'] = [ 'title' => 'limits' ];
 
 		return $attributes;
 	}
@@ -36,46 +33,31 @@ class ConfigBlock extends \Icybee\ConfigBlock
 	{
 		$ns = $this->module->flat_id;
 
-		return array_merge
-		(
-			parent::lazy_get_children(), array
-			(
-				"local[$ns.default_editor]" => new Text
-				(
-					array
-					(
-						Group::LABEL => 'default_editor'
-					)
-				),
+		return array_merge(parent::lazy_get_children(), [
 
-				"local[$ns.use_multi_editor]" => new Element
-				(
-					Element::TYPE_CHECKBOX, array
-					(
-						Element::LABEL => 'use_multi_editor'
-					)
-				),
+			"local[$ns.default_editor]" => new Text([
 
-				"local[$ns.limits.home]" => new Text
-				(
-					array
-					(
-						Group::LABEL => 'limits_home',
-						Element::DEFAULT_VALUE => 3,
-						Element::GROUP => 'limits'
-					)
-				),
+				Group::LABEL => 'default_editor'
+			]),
 
-				"local[$ns.limits.list]" => new Text
-				(
-					array
-					(
-						Group::LABEL => 'limits_list',
-						Element::DEFAULT_VALUE => 10,
-						Element::GROUP => 'limits'
-					)
-				)
-			)
-		);
+			"local[$ns.use_multi_editor]" => new Element(Element::TYPE_CHECKBOX, [
+
+				Element::LABEL => 'use_multi_editor'
+			]),
+
+			"local[$ns.limits.home]" => new Text([
+
+				Group::LABEL => 'limits_home',
+				Element::DEFAULT_VALUE => 3,
+				Element::GROUP => 'limits'
+			]),
+
+			"local[$ns.limits.list]" => new Text([
+
+				Group::LABEL => 'limits_list',
+				Element::DEFAULT_VALUE => 10,
+				Element::GROUP => 'limits'
+			])
+		]);
 	}
 }

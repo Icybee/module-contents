@@ -116,13 +116,13 @@ class ViewProvider extends \Icybee\Modules\Nodes\ViewProvider
 
 		if ($p < 60)
 		{
-			throw new RecordNotFound('Record not found.', array());
+			throw new RecordNotFound('Record not found.', []);
 		}
 		else if ($key)
 		{
 			$record = $model[$key];
 
-			\ICanBoogie\log('The record %title was rescued!', array('title' => $record->title));
+			\ICanBoogie\log('The record %title was rescued!', [ 'title' => $record->title ]);
 
 			throw new ForceRedirect($record->url, 301);
 		}

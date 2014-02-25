@@ -25,17 +25,10 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 
 		$attributes[Element::GROUPS] = array_merge
 		(
-			$attributes[Element::GROUPS], array
-			(
-				'contents' => array
-				(
-					'title' => 'Content'
-				),
+			$attributes[Element::GROUPS], [
 
-				'date' => array
-				(
-
-				)
+				'contents' => [ 'title' => 'Content' ],
+				'date' => []
 			)
 		);
 
@@ -62,63 +55,48 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 
 		$values = $this->values;
 
-		return array_merge
-		(
-			parent::lazy_get_children(), array
+		return array_merge(parent::lazy_get_children(), [
+
+			Content::SUBTITLE => new Text([
+
+				Form::LABEL => 'subtitle'
+			]),
+
+			Content::BODY => new MultiEditorElement
 			(
-				Content::SUBTITLE => new Text
-				(
-					array
-					(
-						Form::LABEL => 'subtitle'
-					)
-				),
+				$values['editor'] ? $values['editor'] : $default_editor, [
 
-				Content::BODY => new MultiEditorElement
-				(
-					$values['editor'] ? $values['editor'] : $default_editor, array
-					(
-						Element::LABEL_MISSING => 'Contents',
-						Element::GROUP => 'contents',
-						Element::REQUIRED => true,
+					Element::LABEL_MISSING => 'Contents',
+					Element::GROUP => 'contents',
+					Element::REQUIRED => true,
 
-						'rows' => 16
-					)
-				),
+					'rows' => 16
+				]
+			),
 
-				Content::EXCERPT => $core->editors['rte']->from
-				(
-					array
-					(
-						Form::LABEL => 'excerpt',
-						Element::GROUP => 'contents',
-						Element::DESCRIPTION => "excerpt",
+			Content::EXCERPT => $core->editors['rte']->from([
 
-						'rows' => 3
-					)
-				),
+				Form::LABEL => 'excerpt',
+				Element::GROUP => 'contents',
+				Element::DESCRIPTION => "excerpt",
 
-				Content::DATE => new \Brickrouge\Date
-				(
-					array
-					(
-						Form::LABEL => 'Date',
-						Element::REQUIRED => true,
-						Element::DEFAULT_VALUE => date('Y-m-d')
-					)
-				),
+				'rows' => 3
+			]),
 
-				Content::IS_HOME_EXCLUDED => new Element
-				(
-					Element::TYPE_CHECKBOX, array
-					(
-						Element::LABEL => "is_home_excluded",
-						Element::GROUP => 'visibility',
-						Element::DESCRIPTION => "is_home_excluded"
-					)
-				)
-			)
-		);
+			Content::DATE => new \Brickrouge\Date([
+
+				Form::LABEL => 'Date',
+				Element::REQUIRED => true,
+				Element::DEFAULT_VALUE => date('Y-m-d')
+			]),
+
+			Content::IS_HOME_EXCLUDED => new Element(Element::TYPE_CHECKBOX, [
+
+				Element::LABEL => "is_home_excluded",
+				Element::GROUP => 'visibility',
+				Element::DESCRIPTION => "is_home_excluded"
+			])
+		]);
 	}
 
 	protected function lazy_get_values()

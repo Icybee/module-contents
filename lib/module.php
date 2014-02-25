@@ -21,24 +21,22 @@ class Module extends \Icybee\Modules\Nodes\Module
 	 */
 	protected function lazy_get_views()
 	{
-		$options = array
-		(
-			'assets' => array
-			(
-				'css' => array(DIR . 'public/page.css')
-			),
+		$options = [
+
+			'assets' => [
+
+				'css' => [ DIR . 'public/page.css' ]
+			],
 
 			'provider' => __NAMESPACE__ . '\ViewProvider'
-		);
+		];
 
-		return \ICanBoogie\array_merge_recursive
-		(
-			parent::lazy_get_views(), array
-			(
-				'view' => $options,
-				'list' => $options,
-				'home' => $options
-			)
-		);
+		return \ICanBoogie\array_merge_recursive(parent::lazy_get_views(), [
+
+			'view' => $options,
+			'list' => $options,
+			'home' => $options
+
+		]);
 	}
 }

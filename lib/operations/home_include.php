@@ -23,14 +23,13 @@ class HomeIncludeOperation extends \ICanBoogie\Operation
 	 */
 	protected function get_controls()
 	{
-		return array
-		(
+		return [
+
 			self::CONTROL_PERMISSION => Module::PERMISSION_MAINTAIN,
 			self::CONTROL_RECORD => true,
 			self::CONTROL_OWNERSHIP => true
-		)
 
-		+ parent::get_controls();
+		] + parent::get_controls();
 	}
 
 	protected function validate(\ICanBoogie\Errors $errors)
@@ -44,7 +43,7 @@ class HomeIncludeOperation extends \ICanBoogie\Operation
 		$record->is_home_excluded = false;
 		$record->save();
 
-		$this->response->message = new FormattedString('%title is now included in the home page', array('%title' => $record->title));
+		$this->response->message = new FormattedString('%title is now included in the home page', [ '%title' => $record->title ]);
 
 		return true;
 	}

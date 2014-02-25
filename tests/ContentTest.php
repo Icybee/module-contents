@@ -44,14 +44,14 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 	{
 		global $core;
 
-		return array
-		(
-			array('year', array('date' => '2013-12-11'), 2013),
-			array('month', array('date' => '2013-12-11'), '12'),
-			array('month', array('date' => '2013-01-11'), '01'),
-			array('day', array('date' => '2013-12-11'), '11'),
-			array('day', array('date' => '2013-12-01'), '01')
-		);
+		return [
+
+			[ 'year', [ 'date' => '2013-12-11' ], 2013 ],
+			[ 'month', [ 'date' => '2013-12-11' ], '12' ],
+			[ 'month', [ 'date' => '2013-01-11' ], '01' ],
+			[ 'day', [ 'date' => '2013-12-11' ], '11' ],
+			[ 'day', [ 'date' => '2013-12-01' ], '01' ]
+		];
 	}
 
 	/**
@@ -67,7 +67,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 		$this->assertArrayHasKey('excerpt', $r->to_array());
 		$this->assertContains('excerpt', $r->__sleep());
 
-		$r = Content::from(array('body' => '<p>BODY</p>', 'excerpt' => '<p>EXCERPT</p>'));
+		$r = Content::from([ 'body' => '<p>BODY</p>', 'excerpt' => '<p>EXCERPT</p>' ]);
 		$this->assertEquals('<p>EXCERPT</p>', $r->excerpt);
 		$this->assertArrayHasKey('excerpt', $r->to_array());
 		$this->assertContains('excerpt', $r->__sleep());
@@ -84,7 +84,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 		$this->assertArrayNotHasKey('excerpt', $r->to_array());
 		$this->assertNotContains('excerpt', $r->__sleep());
 
-		$r = Content::from(array('body' => '<p>BODY</p>'));
+		$r = Content::from([ 'body' => '<p>BODY</p>' ]);
 		$this->assertEquals('<p>BODY</p>', $r->excerpt);
 		$this->assertArrayNotHasKey('excerpt', $r->to_array());
 		$this->assertNotContains('excerpt', $r->__sleep());
