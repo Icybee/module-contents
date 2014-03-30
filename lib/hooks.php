@@ -11,8 +11,6 @@
 
 namespace Icybee\Modules\Contents;
 
-use ICanBoogie\Event;
-
 use Icybee\Modules\Cache\Collection as CacheCollection;
 use Icybee\Modules\Files\File;
 
@@ -37,7 +35,7 @@ class Hooks
 	 * The callback is called when the `Icybee\Modules\Files\File::move` is triggered, allowing us
 	 * to update contents to the changed path of resources.
 	 *
-	 * @param File\Event $event
+	 * @param File\MoveEvent $event
 	 * @param File $target
 	 */
 	static public function on_file_move(File\MoveEvent $event, File $target)
