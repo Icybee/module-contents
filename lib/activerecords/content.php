@@ -115,6 +115,28 @@ class Content extends \Icybee\Modules\Nodes\Node
 	static private $use_cache;
 	static private $cache_model;
 
+	static private function obtain_cache()
+	{
+		global $core;
+
+		if (self::$cache_model)
+		{
+			return self::$cache_model;
+		}
+
+		if (self::$use_cache === null)
+		{
+			self::$use_cache = !empty($core->registry['contents.cache_rendered_body']);
+		}
+
+		if (!self::$use_cache)
+		{
+			return;
+		}
+
+		return self::$cache_model = $core->models['contents/cache'];
+	}
+
 	private $rendered_body;
 
 	/**
@@ -137,25 +159,17 @@ class Content extends \Icybee\Modules\Nodes\Node
 			return $rendered_body;
 		}
 
-		if (self::$use_cache === null)
-		{
-			self::$use_cache = !empty($core->registry['contents.cache_rendered_body']);
-		}
-
 		$rendered_body = $body = $this->body;
 
 		try
 		{
-			if (self::$use_cache)
-			{
-				if (self::$cache_model === null)
-				{
-					self::$cache_model = $core->models['contents/cache'];
-				}
+			$cache = self::obtain_cache();
 
+			if ($cache)
+			{
 				$nid = $this->nid;
 				$updated_at = $this->updated_at;
-				$cached = self::$cache_model->select('body')->filter_by_nid_and_timestamp($nid, $updated_at)->rc;
+				$cached = $cache->select('body')->filter_by_nid_and_timestamp($nid, $updated_at)->rc;
 
 				if ($cached)
 				{
@@ -169,16 +183,13 @@ class Content extends \Icybee\Modules\Nodes\Node
 
 				if ($rendered_body && $rendered_body != $body)
 				{
-					self::$cache_model->save
-					(
-						[
-							'nid' => $nid,
-							'timestamp' => $updated_at,
-							'body' => $rendered_body
-						],
+					$cache->save([
 
-						null, [ 'on duplicate' => true ]
-					);
+						'nid' => $nid,
+						'timestamp' => $updated_at,
+						'body' => $rendered_body
+
+					], null, [ 'on duplicate' => true ] );
 				}
 			}
 			else if ($this->editor)
@@ -188,7 +199,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 		}
 		catch (\Exception $e)
 		{
-			$rendered_body = $e->getMessage();
+			$rendered_body = \ICanBoogie\Debug::format_alert($e);
 		}
 
 		$this->rendered_body = $rendered_body;
