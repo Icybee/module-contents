@@ -51,7 +51,7 @@ class CacheManager implements \Icybee\Modules\Cache\CacheManagerInterface
 	{
 		global $core;
 
-		$model = $core->models['contents/cache'];
+		$model = $core->models['contents/rendered'];
 
 		list($count, $size) = $model->select('COUNT(nid) count, SUM(LENGTH(body)) size')->one(\PDO::FETCH_NUM);
 
@@ -62,6 +62,6 @@ class CacheManager implements \Icybee\Modules\Cache\CacheManagerInterface
 	{
 		global $core;
 
-		return $core->models['contents/cache']->truncate();
+		return $core->models['contents/rendered']->truncate();
 	}
 }

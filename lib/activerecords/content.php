@@ -134,7 +134,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 			return;
 		}
 
-		return self::$cache_model = $core->models['contents/cache'];
+		return self::$cache_model = $core->models['contents/rendered'];
 	}
 
 	private $rendered_body;
@@ -169,7 +169,10 @@ class Content extends \Icybee\Modules\Nodes\Node
 			{
 				$nid = $this->nid;
 				$updated_at = $this->updated_at;
-				$cached = $cache->select('body')->filter_by_nid_and_timestamp($nid, $updated_at)->rc;
+				$cached = $cache
+				->select('body')
+				->filter_by_nid_and_updated_at($nid, $updated_at)
+				->rc;
 
 				if ($cached)
 				{
@@ -186,7 +189,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 					$cache->save([
 
 						'nid' => $nid,
-						'timestamp' => $updated_at,
+						'updated_at' => $updated_at,
 						'body' => $rendered_body
 
 					], null, [ 'on duplicate' => true ] );

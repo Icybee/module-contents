@@ -30,9 +30,8 @@ return [
 			]
 		],
 
-		'cache' => [
+		'rendered' => [
 
-			Model::ACTIVERECORD_CLASS => 'ICanBoogie\ActiveRecord',
 			Model::CLASSNAME => 'ICanBoogie\ActiveRecord\Model',
 			Model::CONNECTION => 'local',
 			Model::SCHEMA => [
@@ -40,7 +39,7 @@ return [
 				'fields' => [
 
 					'nid' => [ 'foreign', 'primary' => true ],
-					'timestamp' => 'timestamp',
+					'updated_at' => 'datetime',
 					'body' => 'text'
 				]
 			]
