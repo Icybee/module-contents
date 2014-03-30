@@ -41,6 +41,79 @@ class Content extends \Icybee\Modules\Nodes\Node
 	const IS_HOME_EXCLUDED = 'is_home_excluded';
 
 	/**
+	 * Sets the {@link $rendered_body} property of the loaded records if suitable rendered bodies
+	 * are available in the cache.
+	 *
+	 * @param \Icybee\Modules\Views\ActiveRecordProvider\AlterResultEvent $event
+	 * @param \Icybee\Modules\Views\ActiveRecordProvider $target
+	 */
+	static public function on_views_activerecordprovider_alter_result(\Icybee\Modules\Views\ActiveRecordProvider\AlterResultEvent $event, \Icybee\Modules\Views\ActiveRecordProvider $target)
+	{
+		if (!is_array($event->result) || !($event->module instanceof Module))
+		{
+			return;
+		}
+
+		$cache = self::obtain_cache();
+
+		if (!$cache)
+		{
+			return;
+		}
+
+		$records = $event->result;
+		$record = current($records);
+
+		if (!($record instanceof Content))
+		{
+			return;
+		}
+
+		$keys_and_dates = [];
+
+		/* @var $record Content */
+
+		foreach ($records as $record)
+		{
+			$keys_and_dates[$record->nid] = $record->updated_at;
+		}
+
+		if (!$keys_and_dates)
+		{
+			return;
+		}
+
+		/* @var $rendered_list_by_nid Rendered[] */
+		/* @var $rendered Rendered */
+
+		$rendered_list_by_nid = [];
+
+		foreach ($cache->filter_by_nid(array_keys($keys_and_dates)) as $rendered)
+		{
+			$rendered_list_by_nid[$rendered->nid] = $rendered;
+		}
+
+		foreach ($records as $record)
+		{
+			$nid = $record->nid;
+
+			if (empty($rendered_list_by_nid[$nid]))
+			{
+				continue;
+			}
+
+			$rendered = $rendered_list_by_nid[$nid];
+
+			if ($record->updated_at > $rendered->updated_at)
+			{
+				continue;
+			}
+
+			$record->rendered_body = $rendered->body;
+		}
+	}
+
+	/**
 	 * Subtitle.
 	 *
 	 * @var string
