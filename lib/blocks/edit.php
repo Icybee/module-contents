@@ -29,7 +29,8 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 
 				'contents' => [ 'title' => 'Content' ],
 				'date' => []
-			)
+
+			]
 		);
 
 		return $attributes;
