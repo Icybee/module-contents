@@ -11,6 +11,9 @@
 
 namespace Icybee\Modules\Contents;
 
+use ICanBoogie\ActiveRecord\RecordNotFound;
+use ICanBoogie\HTTP\ForceRedirect;
+
 use Icybee\Modules\Cache\Collection as CacheCollection;
 use Icybee\Modules\Files\File;
 
@@ -46,5 +49,64 @@ class Hooks
 		(
 			'UPDATE {self} SET `body` = REPLACE(`body`, ?, ?)', [ $event->from, $event->to ]
 		);
+	}
+
+	/**
+	 * Rescues a not found record by providing the best matching one.
+	 *
+	 * Match is computed from the slug of the model's own visible records. The rescue is attempted
+	 * only if 'slug' is defined in the conditions.
+	 *
+	 * @param \Icybee\Modules\Views\View\RescueEvent $event
+	 * @param View $target
+	 *
+	 * @throws RecordNotFound when no record can be found.
+	 * @throws ForceRedirect when a record with a similar slug is found.
+	 */
+	static public function on_view_rescue(\Icybee\Modules\Views\View\RescueEvent $event, View $target)
+	{
+		if ($target->renders != View::RENDERS_ONE)
+		{
+			return;
+		}
+
+		$conditions = $target->provider->conditions;
+		$model = $target->module->model;
+
+		if (!empty($conditions['nid']) || empty($conditions['slug']))
+		{
+			return;
+		}
+
+		$slug = $conditions['slug'];
+		$tries = $model->select('nid, slug')->own->visible->order('date DESC')->pairs;
+		$best_score = 0;
+		$best_nid = null;
+
+		foreach ($tries as $nid => $compare)
+		{
+			similar_text($slug, $compare, $p);
+
+			if ($p > $best_score)
+			{
+				$best_nid = $nid;
+				$best_score = $p;
+			}
+
+			if ($p > 90) break;
+		}
+
+		if ($best_score < 60)
+		{
+			throw new RecordNotFound('Record not found.', []);
+		}
+		else if ($best_nid)
+		{
+			$record = $model[$best_nid];
+
+			\ICanBoogie\log('The record %title was rescued!', [ 'title' => $record->title ]);
+
+			throw new ForceRedirect($record->url, 301);
+		}
 	}
 }

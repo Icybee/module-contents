@@ -11,16 +11,14 @@
 
 namespace Icybee\Modules\Contents;
 
-class Model extends \Icybee\Modules\Nodes\Model
+use ICanBoogie\ActiveRecord\Query;
+
+class DayCriterion extends \ICanBoogie\ActiveRecord\Criterion
 {
-	protected function get_criteria()
+	public function alter_query_with_value(Query $query, $value)
 	{
-		return parent::get_criteria() + [
+		// TODO-20140527: support Set and Interval
 
-			'day' =>   __NAMESPACE__ . '\DayCriterion',
-			'month' => __NAMESPACE__ . '\MonthCriterion',
-			'year' =>  __NAMESPACE__ . '\YearCriterion'
-
-		];
+		return $query->and('DAY(date) = ?', (int) $value);
 	}
 }

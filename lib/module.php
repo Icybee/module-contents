@@ -23,12 +23,14 @@ class Module extends \Icybee\Modules\Nodes\Module
 	{
 		$options = [
 
-			'assets' => [
+			View::CLASSNAME => __NAMESPACE__ . '\View',
+			View::PROVIDER => __NAMESPACE__ . '\ViewProvider',
+
+			View::ASSETS => [
 
 				'css' => [ DIR . 'public/page.css' ]
-			],
+			]
 
-			'provider' => __NAMESPACE__ . '\ViewProvider'
 		];
 
 		return \ICanBoogie\array_merge_recursive(parent::lazy_get_views(), [

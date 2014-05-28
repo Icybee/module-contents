@@ -11,120 +11,17 @@
 
 namespace Icybee\Modules\Contents;
 
-use ICanBoogie\HTTP\ForceRedirect;
-
-use ICanBoogie\ActiveRecord;
-use ICanBoogie\ActiveRecord\Query;
-use ICanBoogie\ActiveRecord\RecordNotFound;
-
 class ViewProvider extends \Icybee\Modules\Nodes\ViewProvider
 {
 	/**
 	 * Tries to rescue the record if finding the record failed.
 	 */
-	public function __invoke()
+	public function __invoke(array $conditions)
 	{
-		$rc = parent::__invoke();
+		return parent::__invoke($conditions + [
 
-		if (!$rc && $this->returns == self::RETURNS_ONE)
-		{
-			$rc = $this->rescue();
-		}
+			'-date' // FIXME-20120528: Should be "-date,-created_at" but multiple order is not supported yet
 
-		return $rc;
-	}
-
-	/**
-	 * Support for the `year`, `month` and `day` conditions. Changes the order to
-	 * `date DESC, created_at DESC`.
-	 *
-	 * If the view is of type "home" the query is altered to search for nodes which are not
-	 * excluded from _home_.
-	 */
-	protected function alter_query(Query $query, array $conditions)
-	{
-		foreach ($conditions as $property => $value)
-		{
-			switch ($property)
-			{
-				case 'year':
-					$query->where('YEAR(date) = ?', (int) $value);
-					break;
-
-				case 'month':
-					$query->where('MONTH(date) = ?', (int) $value);
-					break;
-
-				case 'day':
-					$query->where('DAY(date) = ?', (int) $value);
-					break;
-			}
-		}
-
-		if ($this->view->type == 'home')
-		{
-			$query->where('is_home_excluded = 0');
-		}
-
-		return parent::alter_query($query, $conditions)->order('date DESC, created_at DESC');
-	}
-
-	/**
-	 * Rescues a missing record by providing the best matching one.
-	 *
-	 * Match is computed from the slug of the module's own visible records, thus rescue if only
-	 * triggered if 'slug' is defined in the conditions.
-	 *
-	 * @return Content|null The record best matching the condition slug, or null if
-	 * none was similar enough.
-	 *
-	 * @throws RecordNotFound if the record could not be rescued.
-	 *
-	 * @todo-20140429 This should be in an exception rescue listener.
-	 */
-	protected function rescue()
-	{
-		$conditions = $this->conditions;
-
-		if (!empty($conditions['nid']) || empty($conditions['slug']))
-		{
-			return;
-		}
-
-		$slug = $conditions['slug'];
-		$model = $this->module->model;
-		$tries = $model->select('nid, slug')->own->visible->order('date DESC')->pairs;
-		$key = null;
-		$max = 0;
-
-		foreach ($tries as $nid => $compare)
-		{
-			similar_text($slug, $compare, $p);
-
-			if ($p > $max)
-			{
-				$key = $nid;
-
-				if ($p > 90)
-				{
-					break;
-				}
-
-				$max = $p;
-			}
-		}
-
-		if ($p < 60)
-		{
-			throw new RecordNotFound('Record not found.', []);
-		}
-		else if ($key)
-		{
-			$record = $model[$key];
-
-			\ICanBoogie\log('The record %title was rescued!', [ 'title' => $record->title ]);
-
-			throw new ForceRedirect($record->url, 301);
-		}
+		]);
 	}
 }
