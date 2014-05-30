@@ -20,7 +20,7 @@ class ViewProvider extends \Icybee\Modules\Nodes\ViewProvider
 	{
 		return parent::__invoke($conditions + [
 
-			'-date' // FIXME-20120528: Should be "-date,-created_at" but multiple order is not supported yet
+			'order' => '-date' // FIXME-20120528: Should be "-date,-created_at" but multiple order is not supported yet
 
 		]);
 	}
