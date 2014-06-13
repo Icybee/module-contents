@@ -391,7 +391,7 @@ trait DateProperty
 	 */
 	protected function get_date()
 	{
-		return DateTimePropertySupport::datetime_get($this->date);
+		return DateTimePropertySupport::get($this->date);
 	}
 
 	/**
@@ -401,6 +401,6 @@ trait DateProperty
 	 */
 	protected function set_date($datetime)
 	{
-		DateTimePropertySupport::datetime_set($this->date, $datetime);
+		DateTimePropertySupport::set($this->date, $datetime);
 	}
 }
