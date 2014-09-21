@@ -24,7 +24,6 @@ class Module extends \Icybee\Modules\Nodes\Module
 		$options = [
 
 			View::CLASSNAME => __NAMESPACE__ . '\View',
-			View::PROVIDER => __NAMESPACE__ . '\ViewProvider',
 
 			View::ASSETS => [
 
