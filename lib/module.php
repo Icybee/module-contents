@@ -23,8 +23,6 @@ class Module extends \Icybee\Modules\Nodes\Module
 	{
 		$options = [
 
-			View::CLASSNAME => __NAMESPACE__ . '\View',
-
 			View::ASSETS => [
 
 				'css' => [ DIR . 'public/page.css' ]
@@ -36,8 +34,14 @@ class Module extends \Icybee\Modules\Nodes\Module
 
 			'view' => $options,
 			'list' => $options,
-			'home' => $options
+			'home' => $options + [
 
+				View::CONDITIONS => [
+
+					'is_home_excluded' => false
+
+				]
+			]
 		]);
 	}
 }
