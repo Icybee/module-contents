@@ -53,6 +53,16 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 			'is_home_excluded' => __CLASS__ . '\IsHomeExcludedColumn'
 		]);
 	}
+
+	protected function get_available_jobs()
+	{
+		return array_merge(parent::get_available_jobs(), [
+
+			'home_include' => $this->t('home_include.operation.short_title'),
+			'home_exclude' => $this->t('home_exclude.operation.short_title')
+
+		]);
+	}
 }
 
 namespace Icybee\Modules\Contents\ManageBlock;

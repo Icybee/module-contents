@@ -22,6 +22,36 @@ return [
 		'use_multi_editor' => "Permettre à l'utilisateur de changer d'éditeur",
 	],
 
+	'home_include.operation' => [
+
+		'title' => "Inclure des enregistrements à l'accueil",
+		'short_title' => "Inclure à l'accueil",
+		'continue' => "Inclure à l'accueil",
+		'cancel' => "Ne pas inclure à l'accueil",
+
+		'confirm' => [
+
+			'one' => "Êtes-vous certain de vouloir inclure l'enregistrement sélectionné à l'accueil ?",
+			'other' => "Êtes-vous certain de vouloir inclure les :count enregistrements sélectionnés à l'accueil ?",
+
+		]
+	],
+
+	'home_exclude.operation' => [
+
+		'title' => "Exclure des enregistrements de l'accueil",
+		'short_title' => "Exclure de l'accueil",
+		'continue' => "Exclure de l'accueil",
+		'cancel' => "Ne pas exclure de l'accueil",
+
+		'confirm' => [
+
+			'one' => "Êtes-vous certain de vouloir exclure l'enregistrement sélectionné de l'accueil ?",
+			'other' => "Êtes-vous certain de vouloir exclure les :count enregistrements sélectionnés de l'accueil ?",
+
+		]
+	],
+
 	'module_category.contents' => 'Contenu',
 	'module_title.contents' => 'Contenus',
 
