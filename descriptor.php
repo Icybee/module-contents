@@ -3,15 +3,15 @@
 namespace Icybee\Modules\Contents;
 
 use ICanBoogie\ActiveRecord\Model;
-use ICanBoogie\Module;
+use ICanBoogie\Module\Descriptor;
 
 return [
 
-	Module::T_CATEGORY => 'contents',
-	Module::T_DESCRIPTION => 'Base module for content nodes such as articles or news.',
-	Module::T_EXTENDS => 'nodes',
+	Descriptor::CATEGORY => 'contents',
+	Descriptor::DESCRIPTION => 'Base module for content nodes such as articles or news.',
+	Descriptor::INHERITS => 'nodes',
 
-	Module::T_MODELS => [
+	Descriptor::MODELS => [
 
 		'primary' => [
 
@@ -46,7 +46,7 @@ return [
 		]
 	],
 
-	Module::T_NAMESPACE => __NAMESPACE__,
-	Module::T_REQUIRED => true,
-	Module::T_TITLE => 'Contents'
+	Descriptor::NS => __NAMESPACE__,
+	Descriptor::REQUIRED => true,
+	Descriptor::TITLE => 'Contents'
 ];
