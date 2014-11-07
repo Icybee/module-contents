@@ -16,13 +16,19 @@
 		"issues": "https://github.com/Icybee/module-contents/issues",
 		"source": "https://github.com/Icybee/module-contents"
 	},
-	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.3.0",
-		"icanboogie/module-installer": "*",
-		"icybee/module-nodes": "2.x"
+		"php": ">=5.4.0",
+		"icanboogie/module-installer": "~1.2",
+		"icybee/module-registry": "~2.0",
+		"icybee/module-nodes": "~2.0"
+	},
+	"require-dev": {
+		"icanboogie/icanboogie": "~2.0"
 	},
 	"autoload": {
 		"classmap": [ "lib" ]
+	},
+	"scripts": {
+		"post-autoload-dump": "ICanBoogie\\AutoConfig\\Hooks::on_autoload_dump"
 	}
 }

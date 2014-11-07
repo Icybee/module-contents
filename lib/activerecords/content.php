@@ -217,7 +217,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 *
 	 * The body is rendered using the editor that was used to edit the content.
 	 *
-	 * A cache maybe used to store et retrieve the rendered content.
+	 * A cache maybe used to store and retrieve the rendered content.
 	 *
 	 * @return string The rendered body.
 	 */
