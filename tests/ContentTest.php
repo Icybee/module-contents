@@ -42,8 +42,6 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 
 	public function provide_test_get_property()
 	{
-		global $core;
-
 		return [
 
 			[ 'year', [ 'date' => '2013-12-11' ], 2013 ],

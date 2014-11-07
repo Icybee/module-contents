@@ -38,12 +38,11 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 
 	protected function lazy_get_children()
 	{
-		global $core;
-
+		$app = $this->app;
+		$metas = $app->site->metas;
 		$module_flat_id = $this->module->flat_id;
-
-		$default_editor = $core->site->metas->get($module_flat_id . '.default_editor', 'rte');
-		$use_multi_editor = $core->site->metas->get($module_flat_id . '.use_multi_editor');
+		$default_editor = $metas[$module_flat_id . '.default_editor'] ?: 'rte';
+		$use_multi_editor = $metas[$module_flat_id . '.use_multi_editor'];
 
 		if ($use_multi_editor)
 		{
@@ -75,7 +74,7 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 				]
 			),
 
-			Content::EXCERPT => $core->editors['rte']->from([
+			Content::EXCERPT => $app->editors['rte']->from([
 
 				Form::LABEL => 'excerpt',
 				Element::GROUP => 'contents',
@@ -102,13 +101,11 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 
 	protected function lazy_get_values()
 	{
-		global $core;
-
 		$values = parent::lazy_get_values();
 
 		if (isset($values['editor']) && isset($values['body']))
 		{
-			$editor = $core->editors[$values['editor']];
+			$editor = $this->app->editors[$values['editor']];
 
 			$values['body'] = $editor->unserialize($values['body']);
 		}

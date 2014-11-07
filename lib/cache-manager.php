@@ -25,33 +25,27 @@ class CacheManager implements \Icybee\Modules\Cache\CacheManagerInterface
 	public $group = 'contents';
 	public $state = false;
 	public $config_preview;
+	private $app;
 
 	public function __construct()
 	{
-		global $core;
-
-		$this->state = !empty($core->registry['contents.cache_rendered_body']);
+		$this->app = \ICanBoogie\app();
+		$this->state = !empty($this->app->registry['contents.cache_rendered_body']);
 	}
 
 	public function enable()
 	{
-		global $core;
-
-		return $core->registry['contents.cache_rendered_body'] = true;
+		return $this->app->registry['contents.cache_rendered_body'] = true;
 	}
 
 	public function disable()
 	{
-		global $core;
-
-		return $core->registry['contents.cache_rendered_body'] = false;
+		return $this->app->registry['contents.cache_rendered_body'] = false;
 	}
 
 	public function stat()
 	{
-		global $core;
-
-		$model = $core->models['contents/rendered'];
+		$model = $this->app->models['contents/rendered'];
 
 		list($count, $size) = $model->select('COUNT(nid) count, SUM(LENGTH(body)) size')->one(\PDO::FETCH_NUM);
 
@@ -60,8 +54,6 @@ class CacheManager implements \Icybee\Modules\Cache\CacheManagerInterface
 
 	function clear()
 	{
-		global $core;
-
-		return $core->models['contents/rendered']->truncate();
+		return $this->app->models['contents/rendered']->truncate();
 	}
 }

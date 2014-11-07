@@ -43,9 +43,7 @@ class Hooks
 	 */
 	static public function on_file_move(File\MoveEvent $event, File $target)
 	{
-		global $core;
-
-		$core->models['contents']->execute
+		\ICanBoogie\app()->models['contents']->execute
 		(
 			'UPDATE {self} SET `body` = REPLACE(`body`, ?, ?)', [ $event->from, $event->to ]
 		);

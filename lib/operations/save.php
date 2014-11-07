@@ -21,13 +21,11 @@ class SaveOperation extends \Icybee\Modules\Nodes\SaveOperation
 	 */
 	protected function lazy_get_properties()
 	{
-		global $core;
-
 		$properties = parent::lazy_get_properties();
 
 		if (isset($properties['body']) && isset($properties['editor']))
 		{
-			$editor = $core->editors[$properties['editor']];
+			$editor = $this->app->editors[$properties['editor']];
 
 			$properties['body'] = $editor->serialize($properties['body']);
 		}

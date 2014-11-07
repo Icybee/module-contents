@@ -190,16 +190,16 @@ class Content extends \Icybee\Modules\Nodes\Node
 
 	static private function obtain_cache()
 	{
-		global $core;
-
 		if (self::$cache_model)
 		{
 			return self::$cache_model;
 		}
 
+		$app = \ICanBoogie\app();
+
 		if (self::$use_cache === null)
 		{
-			self::$use_cache = !empty($core->registry['contents.cache_rendered_body']);
+			self::$use_cache = !empty($app->registry['contents.cache_rendered_body']);
 		}
 
 		if (!self::$use_cache)
@@ -207,7 +207,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 			return;
 		}
 
-		return self::$cache_model = $core->models['contents/rendered'];
+		return self::$cache_model = $app->models['contents/rendered'];
 	}
 
 	private $rendered_body;
@@ -223,8 +223,6 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 */
 	public function __toString()
 	{
-		global $core;
-
 		$rendered_body = $this->rendered_body;
 
 		if ($rendered_body)
