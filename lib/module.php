@@ -38,7 +38,7 @@ class Module extends \Icybee\Modules\Nodes\Module
 
 				View::CONDITIONS => [
 
-					'is_home_excluded' => false
+					'in:home' => true
 
 				]
 			]

@@ -11,7 +11,8 @@ return [
 			'date' =>  __NAMESPACE__ . '\DateCriterion',
 			'day' =>   __NAMESPACE__ . '\DayCriterion',
 			'month' => __NAMESPACE__ . '\MonthCriterion',
-			'year' =>  __NAMESPACE__ . '\YearCriterion'
+			'year' =>  __NAMESPACE__ . '\YearCriterion',
+			'in:home' => __NAMESPACE__ . '\InHomeCriterion'
 
 		]
 
