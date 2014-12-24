@@ -24,7 +24,7 @@ if (!function_exists('ICanBoogie\excerpt'))
 	}
 }
 
-$core = new ICanBoogie\Core(ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(), [
+$app = new ICanBoogie\Core(ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(), [
 
 	'config-path' => [
 
@@ -40,6 +40,6 @@ $core = new ICanBoogie\Core(ICanBoogie\array_merge_recursive(\ICanBoogie\get_aut
 
 ]));
 
-$core->boot();
+$app->boot();
 
-$errors = $core->modules->install(new ICanBoogie\Errors);
+$errors = $app->modules->install(new ICanBoogie\Errors);
