@@ -13,7 +13,7 @@ namespace Icybee\Modules\Contents;
 
 use ICanBoogie\ActiveRecord\Query;
 
-class MonthCriterion extends \ICanBoogie\ActiveRecord\Criterion
+class MonthCriterion extends \ICanBoogie\Facets\Criterion
 {
 	public function alter_query_with_value(Query $query, $value)
 	{

@@ -12,7 +12,7 @@
 namespace Icybee\Modules\Contents;
 
 use ICanBoogie\ActiveRecord\Query;
-use ICanBoogie\ActiveRecord\Criterion;
+use ICanBoogie\Facets\Criterion;
 
 class InHomeCriterion extends Criterion
 {
