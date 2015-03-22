@@ -13,6 +13,7 @@ namespace Icybee\Modules\Contents;
 
 use ICanBoogie\ActiveRecord\DateTimePropertySupport;
 use ICanBoogie\DateTime;
+use ICanBoogie\Facets\RecordCollection;
 use ICanBoogie\PropertyNotWritable;
 use Icybee\Modules\Editor\Editor;
 
@@ -47,12 +48,12 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 *
 	 * TODO-20150322: The `ActiveRecordProvider` does not exists anymore.
 	 *
-	 * @param \Icybee\Modules\Views\ActiveRecordProvider\AlterResultEvent $event
-	 * @param \Icybee\Modules\Views\ActiveRecordProvider $target
+	 * @param RecordCollection\AlterEvent $event
+	 * @param RecordCollection $records
 	 */
-	static public function on_views_activerecordprovider_alter_result(\Icybee\Modules\Views\ActiveRecordProvider\AlterResultEvent $event, \Icybee\Modules\Views\ActiveRecordProvider $target)
+	static public function on_alter_record_collection(RecordCollection\AlterEvent $event, RecordCollection $records)
 	{
-		if (!is_array($event->result) || !($event->module instanceof Module))
+		if (!$records->query->model instanceof Model)
 		{
 			return;
 		}
@@ -60,14 +61,6 @@ class Content extends \Icybee\Modules\Nodes\Node
 		$cache = self::obtain_cache();
 
 		if (!$cache)
-		{
-			return;
-		}
-
-		$records = $event->result;
-		$record = current($records);
-
-		if (!($record instanceof Content))
 		{
 			return;
 		}
