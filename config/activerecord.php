@@ -8,11 +8,11 @@ return [
 
 		'contents' => [
 
-			'date' =>  __NAMESPACE__ . '\DateCriterion',
-			'day' =>   __NAMESPACE__ . '\DayCriterion',
-			'month' => __NAMESPACE__ . '\MonthCriterion',
-			'year' =>  __NAMESPACE__ . '\YearCriterion',
-			'in:home' => __NAMESPACE__ . '\InHomeCriterion'
+			'date' =>  DateCriterion::class,
+			'day' =>   DayCriterion::class,
+			'month' => MonthCriterion::class,
+			'year' =>  YearCriterion::class,
+			'in:home' => InHomeCriterion::class
 
 		]
 

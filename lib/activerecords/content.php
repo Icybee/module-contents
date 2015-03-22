@@ -14,6 +14,7 @@ namespace Icybee\Modules\Contents;
 use ICanBoogie\ActiveRecord\DateTimePropertySupport;
 use ICanBoogie\DateTime;
 use ICanBoogie\PropertyNotWritable;
+use Icybee\Modules\Editor\Editor;
 
 /**
  * Representation of a content.
@@ -27,7 +28,7 @@ use ICanBoogie\PropertyNotWritable;
  * defined.
  * - {@link $date}: The date of the content.
  * - {@link $editor}: The editor used to edit the body of the content.
- * - {@link $is_home_excluded}: An additionnal visibility option.
+ * - {@link $is_home_excluded}: An additional visibility option.
  *
  * @property \ICanBoogie\DateTime $date The date of the content.
  */
@@ -43,6 +44,8 @@ class Content extends \Icybee\Modules\Nodes\Node
 	/**
 	 * Sets the {@link $rendered_body} property of the loaded records if suitable rendered bodies
 	 * are available in the cache.
+	 *
+	 * TODO-20150322: The `ActiveRecordProvider` does not exists anymore.
 	 *
 	 * @param \Icybee\Modules\Views\ActiveRecordProvider\AlterResultEvent $event
 	 * @param \Icybee\Modules\Views\ActiveRecordProvider $target
@@ -204,7 +207,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 
 		if (!self::$use_cache)
 		{
-			return;
+			return null;
 		}
 
 		return self::$cache_model = $app->models['contents/rendered'];
@@ -295,7 +298,9 @@ class Content extends \Icybee\Modules\Nodes\Node
 			return $body;
 		}
 
-		$editor = \ICanBoogie\Core::get()->editors[$this->editor];
+		/* @var $editor Editor */
+
+		$editor = $this->app->editors[$this->editor];
 
 		return (string) $editor->render($editor->unserialize($body));
 	}
@@ -358,11 +363,11 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 * If the {@link $excerpt} property is not empty the excerpt is created from it, otherwise it
 	 * is created from the {@link $body}.
 	 *
-	 * @param number $limit The number of words desired.
+	 * @param int $limit The number of words desired.
 	 *
 	 * @return string
 	 */
-	public function excerpt($limit=55)
+	public function excerpt($limit = 55)
 	{
 		return isset($this->excerpt) ? \ICanBoogie\excerpt($this->excerpt, $limit) : \ICanBoogie\excerpt((string) $this, $limit);
 	}

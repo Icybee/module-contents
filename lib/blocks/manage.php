@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Contents;
 
+use Icybee\ManageBlock\DateColumn;
+
 class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 {
 	static protected function add_assets(\Brickrouge\Document $document)
@@ -21,26 +23,24 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 		$document->js->add(DIR . 'public/admin.js');
 	}
 
-	public function __construct(Module $module, array $attributes=[])
+	public function __construct(Module $module, array $attributes = [])
 	{
-		parent::__construct
-		(
-			$module, $attributes + [
+		parent::__construct($module, $attributes + [
 
-				self::T_COLUMNS_ORDER => [
+			self::T_COLUMNS_ORDER => [
 
-					'title', 'url', 'is_home_excluded', 'is_online', 'uid', 'date', 'updated_at'
-				],
+				'title', 'url', 'is_home_excluded', 'is_online', 'uid', 'date', 'updated_at'
+			],
 
-				self::T_ORDER_BY => [ 'date', 'desc' ]
-			]
-		);
+			self::T_ORDER_BY => [ 'date', 'desc' ]
+
+		]);
 	}
 
 	/**
 	 * Adds the following columns:
 	 *
-	 * - `date`: An instance of {@link \Icybee\ManageBlock\DateColumn}.
+	 * - `date`: An instance of {@link DateColumn}.
 	 * - `is_home_excluded`: An instance of {@link ManageBlock\IsHomeExcludedColumn}.
 	 *
 	 * @return array
@@ -49,8 +49,8 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 	{
 		return array_merge(parent::get_available_columns(), [
 
-			'date' => 'Icybee\ManageBlock\DateColumn',
-			'is_home_excluded' => __CLASS__ . '\IsHomeExcludedColumn'
+			'date' => DateColumn::class,
+			'is_home_excluded' => ManageBlock\IsHomeExcludedColumn::class
 		]);
 	}
 
@@ -68,30 +68,29 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 namespace Icybee\Modules\Contents\ManageBlock;
 
 use Brickrouge\Element;
+use Icybee\Modules\Contents\Content;
 
 /**
  * Representation of the `is_home_excluded` column.
  */
 class IsHomeExcludedColumn extends \Icybee\ManageBlock\BooleanColumn
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options = [])
 	{
-		parent::__construct
-		(
-			$manager, $id, $options + [
+		parent::__construct($manager, $id, $options + [
 
-				'filters' => [
+			'filters' => [
 
-					'options' => [
+				'options' => [
 
-						'=1' => "Excluded from home",
-						'=0' => "Included in home"
-					]
-				],
+					'=1' => "Excluded from home",
+					'=0' => "Included in home"
+				]
+			],
 
-				'cell_renderer' => __NAMESPACE__ . '\IsHomeExcludedCellRenderer'
-			]
-		);
+			'cell_renderer' => IsHomeExcludedCellRenderer::class
+
+		]);
 	}
 }
 
@@ -102,6 +101,9 @@ class IsHomeExcludedCellRenderer extends \Icybee\ManageBlock\BooleanCellRenderer
 {
 	/**
 	 * Returns a _boolean_ element representing a little house.
+	 *
+	 * @param Content $record
+	 * @param string $property
 	 *
 	 * @return \Brickrouge\Element
 	 */

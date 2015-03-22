@@ -24,6 +24,7 @@ class ConfigOperation extends \Icybee\Modules\Nodes\ConfigOperation
 		$properties['local'] += [
 
 			"{$this->module->flat_id}.use_multi_editor" => false
+
 		];
 
 		return $properties;

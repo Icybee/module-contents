@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Contents;
 
+use Icybee\Modules\Views\ViewOptions;
+
 class Module extends \Icybee\Modules\Nodes\Module
 {
 	const OPERATION_HOME_INCLUDE = 'home_include';
@@ -23,7 +25,7 @@ class Module extends \Icybee\Modules\Nodes\Module
 	{
 		$options = [
 
-			View::ASSETS => [
+			ViewOptions::ASSETS => [
 
 				'css' => [ DIR . 'public/page.css' ]
 			]
@@ -36,7 +38,7 @@ class Module extends \Icybee\Modules\Nodes\Module
 			'list' => $options,
 			'home' => $options + [
 
-				View::CONDITIONS => [
+				ViewOptions::CONDITIONS => [
 
 					'in:home' => true
 

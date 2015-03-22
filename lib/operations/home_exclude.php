@@ -11,10 +11,10 @@
 
 namespace Icybee\Modules\Contents;
 
-use ICanBoogie\I18n\FormattedString;
-
 /**
  * Excludes a record from the home page.
+ *
+ * @property Content $record
  */
 class HomeExcludeOperation extends HomeIncludeOperation
 {
@@ -24,7 +24,7 @@ class HomeExcludeOperation extends HomeIncludeOperation
 		$record->is_home_excluded = true;
 		$record->save();
 
-		$this->response->message = new FormattedString('%title is now excluded from the home page', [ '%title' => $record->title ]);
+		$this->response->message = $this->format('%title is now excluded from the home page', [ '%title' => $record->title ]);
 
 		return true;
 	}

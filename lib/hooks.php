@@ -16,6 +16,7 @@ use ICanBoogie\HTTP\ForceRedirect;
 
 use Icybee\Modules\Cache\Collection as CacheCollection;
 use Icybee\Modules\Files\File;
+use Icybee\Modules\Views\ViewOptions;
 
 class Hooks
 {
@@ -63,7 +64,7 @@ class Hooks
 	 */
 	static public function on_view_rescue(\Icybee\Modules\Views\View\RescueEvent $event, View $target)
 	{
-		if ($target->renders != View::RENDERS_ONE)
+		if ($target->renders != ViewOptions::RENDERS_ONE)
 		{
 			return;
 		}

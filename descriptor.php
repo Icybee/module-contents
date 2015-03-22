@@ -49,4 +49,5 @@ return [
 	Descriptor::NS => __NAMESPACE__,
 	Descriptor::REQUIRED => true,
 	Descriptor::TITLE => 'Contents'
+
 ];

@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Contents;
 
+use ICanBoogie\DateTime;
+
 /**
  * Saves a content.
  */
@@ -25,9 +27,16 @@ class SaveOperation extends \Icybee\Modules\Nodes\SaveOperation
 
 		if (isset($properties['body']) && isset($properties['editor']))
 		{
+			/* @var $editor \Icybee\Modules\Editor\Editor */
+
 			$editor = $this->app->editors[$properties['editor']];
 
 			$properties['body'] = $editor->serialize($properties['body']);
+		}
+
+		if (array_key_exists('date', $properties))
+		{
+			$properties['date'] = DateTime::from($properties['date']);
 		}
 
 		return $properties;

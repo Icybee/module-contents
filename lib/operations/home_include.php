@@ -15,6 +15,8 @@ use ICanBoogie\I18n\FormattedString;
 
 /**
  * Includes a record is the home page.
+ *
+ * @property Content $record
  */
 class HomeIncludeOperation extends \ICanBoogie\Operation
 {
@@ -43,7 +45,7 @@ class HomeIncludeOperation extends \ICanBoogie\Operation
 		$record->is_home_excluded = false;
 		$record->save();
 
-		$this->response->message = new FormattedString('%title is now included in the home page', [ '%title' => $record->title ]);
+		$this->response->message = $this->format('%title is now included in the home page', [ '%title' => $record->title ]);
 
 		return true;
 	}
