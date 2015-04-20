@@ -23,15 +23,12 @@ class EditBlock extends \Icybee\Modules\Nodes\EditBlock
 	{
 		$attributes = parent::lazy_get_attributes();
 
-		$attributes[Element::GROUPS] = array_merge
-		(
-			$attributes[Element::GROUPS], [
+		$attributes[Element::GROUPS] = array_merge($attributes[Element::GROUPS], [
 
-				'contents' => [ 'title' => 'Content' ],
-				'date' => []
+			'contents' => [ 'title' => 'Content' ],
+			'date' => []
 
-			]
-		);
+		]);
 
 		return $attributes;
 	}

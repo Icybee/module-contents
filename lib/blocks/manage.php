@@ -114,6 +114,7 @@ class IsHomeExcludedCellRenderer extends \Icybee\ManageBlock\BooleanCellRenderer
 			'class' => 'icon-home trigger ' . ($record->$property ? 'on' : ''),
 			'data-nid' => $record->nid,
 			'title' => "Include or exclude the record from the view 'home'"
+
 		]);
 	}
 }

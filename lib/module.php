@@ -28,6 +28,7 @@ class Module extends \Icybee\Modules\Nodes\Module
 			ViewOptions::ASSETS => [
 
 				'css' => [ DIR . 'public/page.css' ]
+
 			]
 
 		];

@@ -35,6 +35,8 @@ use Icybee\Modules\Editor\Editor;
  */
 class Content extends \Icybee\Modules\Nodes\Node
 {
+	const MODEL_ID = 'contents';
+
 	const SUBTITLE = 'subtitle';
 	const BODY = 'body';
 	const EXCERPT = 'excerpt';
@@ -165,9 +167,9 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 * {@link get_excerpt()} getter provides a default value made from the {@link $body}
 	 * property.
 	 *
-	 * @param Model|string $model Defaults to "contents".
+	 * @param Model|string $model Defaults to {@link MODEL_ID}.
 	 */
-	public function __construct($model='contents')
+	public function __construct($model = self::MODEL_ID)
 	{
 		if (empty($this->excerpt))
 		{

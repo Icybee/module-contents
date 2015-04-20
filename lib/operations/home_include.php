@@ -11,14 +11,15 @@
 
 namespace Icybee\Modules\Contents;
 
-use ICanBoogie\I18n\FormattedString;
+use ICanBoogie\Errors;
+use ICanBoogie\Operation;
 
 /**
  * Includes a record is the home page.
  *
  * @property Content $record
  */
-class HomeIncludeOperation extends \ICanBoogie\Operation
+class HomeIncludeOperation extends Operation
 {
 	/**
 	 * Controls for the operation: permission(maintain), record and ownership.
@@ -34,7 +35,7 @@ class HomeIncludeOperation extends \ICanBoogie\Operation
 		] + parent::get_controls();
 	}
 
-	protected function validate(\ICanBoogie\Errors $errors)
+	protected function validate(Errors $errors)
 	{
 		return true;
 	}
