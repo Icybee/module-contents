@@ -48,8 +48,6 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 * Sets the {@link $rendered_body} property of the loaded records if suitable rendered bodies
 	 * are available in the cache.
 	 *
-	 * TODO-20150322: The `ActiveRecordProvider` does not exists anymore.
-	 *
 	 * @param RecordCollection\AlterEvent $event
 	 * @param RecordCollection $records
 	 */
