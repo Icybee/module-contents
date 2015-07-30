@@ -3,7 +3,7 @@
 namespace Icybee\Modules\Contents;
 
 use ICanBoogie\Facets\RecordCollection;
-use Icybee\Modules\Cache\Collection as CacheCollection;
+use Icybee\Modules\Cache\CacheCollection as CacheCollection;
 use Icybee\Modules\Files\File;
 
 $hooks = Hooks::class . '::';

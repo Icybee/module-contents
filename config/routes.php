@@ -22,4 +22,5 @@ return [
 		'via' => Request::METHOD_DELETE
 
 	]
+
 ];

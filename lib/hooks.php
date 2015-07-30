@@ -14,7 +14,7 @@ namespace Icybee\Modules\Contents;
 use ICanBoogie\ActiveRecord\RecordNotFound;
 use ICanBoogie\HTTP\ForceRedirect;
 
-use Icybee\Modules\Cache\Collection as CacheCollection;
+use Icybee\Modules\Cache\CacheCollection as CacheCollection;
 use Icybee\Modules\Files\File;
 use Icybee\Modules\Views\ViewOptions;
 
