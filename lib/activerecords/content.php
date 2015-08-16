@@ -12,16 +12,14 @@
 namespace Icybee\Modules\Contents;
 
 use ICanBoogie\ActiveRecord\DateTimePropertySupport;
-use ICanBoogie\DateTime;
 use ICanBoogie\Facets\RecordCollection;
-use ICanBoogie\PropertyNotWritable;
 use Icybee\Modules\Editor\Editor;
+use Icybee\Modules\Nodes\Node;
 
 /**
  * Representation of a content.
  *
- * The {@link Content} class extends the {@link \Icybee\Modules\Nodes\Node} class with the
- * following properties:
+ * {@link Content} extends {@link Node} with the following properties:
  *
  * - {@link $subtitle}: An optional subtitle.
  * - {@link $body}: A body (with a customizable editor).
@@ -33,7 +31,7 @@ use Icybee\Modules\Editor\Editor;
  *
  * @property \ICanBoogie\DateTime $date The date of the content.
  */
-class Content extends \Icybee\Modules\Nodes\Node
+class Content extends Node
 {
 	const MODEL_ID = 'contents';
 
@@ -165,7 +163,7 @@ class Content extends \Icybee\Modules\Nodes\Node
 	 * {@link get_excerpt()} getter provides a default value made from the {@link $body}
 	 * property.
 	 *
-	 * @param Model|string $model Defaults to {@link MODEL_ID}.
+	 * @inheritdoc
 	 */
 	public function __construct($model = self::MODEL_ID)
 	{

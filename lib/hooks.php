@@ -32,7 +32,7 @@ class Hooks
 	 */
 	static public function on_cache_collection_collect(CacheCollection\CollectEvent $event, CacheCollection $collection)
 	{
-		$event->collection['contents.body'] = new CacheManager;
+		$event->collection['contents.body'] = new ContentsCacheManager;
 	}
 
 	/**
@@ -44,7 +44,7 @@ class Hooks
 	 */
 	static public function on_file_move(File\MoveEvent $event, File $target)
 	{
-		\ICanBoogie\app()->models['contents']->execute
+		self::app()->models['contents']->execute
 		(
 			'UPDATE {self} SET `body` = REPLACE(`body`, ?, ?)', [ $event->from, $event->to ]
 		);
@@ -107,5 +107,13 @@ class Hooks
 
 			throw new ForceRedirect($record->url, 301);
 		}
+	}
+
+	/**
+	 * @return \ICanBoogie\Core|\ICanBoogie\Binding\ActiveRecord\CoreBindings
+	 */
+	static private function app()
+	{
+		return \ICanBoogie\app();
 	}
 }

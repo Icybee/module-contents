@@ -11,12 +11,14 @@
 
 namespace Icybee\Modules\Contents;
 
+use ICanBoogie\ActiveRecord;
+
 /**
  * Representation of a rendered content record.
  */
-class Rendered extends \ICanBoogie\ActiveRecord
+class Rendered extends ActiveRecord
 {
-	use \ICanBoogie\ActiveRecord\UpdatedAtProperty;
+	use ActiveRecord\UpdatedAtProperty;
 
 	/**
 	 * The identifier of the associated content record.

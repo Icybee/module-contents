@@ -11,11 +11,13 @@
 
 namespace Icybee\Modules\Contents;
 
+use Brickrouge\Document;
+
 use Icybee\ManageBlock\DateColumn;
 
 class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 {
-	static protected function add_assets(\Brickrouge\Document $document)
+	static protected function add_assets(Document $document)
 	{
 		parent::add_assets($document);
 

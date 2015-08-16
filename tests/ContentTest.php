@@ -17,7 +17,7 @@ class ContentTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * @dataProvider provide_test_readonly_properties
-	 * @expectedException ICanBoogie\PropertyNotWritable
+	 * @expectedException \ICanBoogie\PropertyNotWritable
 	 * @param string $property Property name.
 	 */
 	public function test_readonly_properties($property)

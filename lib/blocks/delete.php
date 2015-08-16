@@ -19,9 +19,9 @@ use ICanBoogie\ActiveRecord;
 class DeleteBlock extends \Icybee\Modules\Nodes\DeleteBlock
 {
 	/**
-	 * Returns the record excerpt as preview.
-	 *
 	 * @inheritdoc
+	 *
+	 * @param ActiveRecord|Content $record
 	 */
 	protected function render_preview(ActiveRecord $record)
 	{
