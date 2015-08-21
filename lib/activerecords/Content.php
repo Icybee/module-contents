@@ -51,7 +51,7 @@ class Content extends Node
 	 */
 	static public function on_alter_record_collection(RecordCollection\AlterEvent $event, RecordCollection $records)
 	{
-		if (!$records->query->model instanceof Model)
+		if (!$records->query->model instanceof ContentModel)
 		{
 			return;
 		}

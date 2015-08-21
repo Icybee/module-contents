@@ -30,7 +30,7 @@ return [
 
 		'rendered' => [
 
-			Model::CLASSNAME => 'ICanBoogie\ActiveRecord\Model',
+			Model::CLASSNAME => Model::class,
 			Model::CONNECTION => 'local',
 			Model::SCHEMA => [
 

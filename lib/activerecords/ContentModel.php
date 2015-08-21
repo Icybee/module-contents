@@ -11,7 +11,9 @@
 
 namespace Icybee\Modules\Contents;
 
-class Model extends \Icybee\Modules\Nodes\Model
+use Icybee\Modules\Nodes\NodeModel;
+
+class ContentModel extends NodeModel
 {
 
 }
