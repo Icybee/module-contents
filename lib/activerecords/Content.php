@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Contents;
 
+use ICanBoogie\ActiveRecord;
 use ICanBoogie\ActiveRecord\DateTimePropertySupport;
 use ICanBoogie\Facets\RecordCollection;
 use Icybee\Modules\Editor\Editor;
@@ -182,6 +183,9 @@ class Content extends Node
 	static private $use_cache;
 	static private $cache_model;
 
+	/**
+	 * @return ActiveRecord\Model
+	 */
 	static private function obtain_cache()
 	{
 		if (self::$cache_model)
