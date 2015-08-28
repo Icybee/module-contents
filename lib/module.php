@@ -11,40 +11,8 @@
 
 namespace Icybee\Modules\Contents;
 
-use Icybee\Modules\Views\ViewOptions;
-
 class Module extends \Icybee\Modules\Nodes\Module
 {
 	const OPERATION_HOME_INCLUDE = 'home_include';
 	const OPERATION_HOME_EXCLUDE = 'home_exclude';
-
-	/**
-	 * Overrides the "view", "list" and "home" views to provide different providers.
-	 */
-	protected function lazy_get_views()
-	{
-		$options = [
-
-			ViewOptions::ASSETS => [
-
-				'css' => [ DIR . 'public/page.css' ]
-
-			]
-
-		];
-
-		return \ICanBoogie\array_merge_recursive(parent::lazy_get_views(), [
-
-			'view' => $options,
-			'list' => $options,
-			'home' => $options + [
-
-				ViewOptions::CONDITIONS => [
-
-					'in:home' => true
-
-				]
-			]
-		]);
-	}
 }
