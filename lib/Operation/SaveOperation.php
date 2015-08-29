@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Operation;
 
 use ICanBoogie\DateTime;
 
 /**
  * Saves a content.
  */
-class SaveOperation extends \Icybee\Modules\Nodes\SaveOperation
+class SaveOperation extends \Icybee\Modules\Nodes\Operation\SaveOperation
 {
 	/**
 	 * Serialize the `body` property using its editor.

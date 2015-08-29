@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Operation;
 
-class QueryOperationOperation extends \Icybee\Modules\Nodes\QueryOperationOperation
+class QueryOperationOperation extends \Icybee\Modules\Nodes\Operation\QueryOperationOperation
 {
 	protected function query_home_include()
 	{

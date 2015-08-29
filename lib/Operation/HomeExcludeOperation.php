@@ -9,7 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Operation;
+
+use Icybee\Modules\Contents\Content;
 
 /**
  * Excludes a record from the home page.

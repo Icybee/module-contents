@@ -15,7 +15,7 @@ namespace Icybee\Modules\Contents;
  * The class doesn't do a thing but make config events more accurate because one can listen to the
  * configuration of a "contents" type module.
  */
-class ConfigOperation extends \Icybee\Modules\Nodes\ConfigOperation
+class ConfigOperation extends \Icybee\Modules\Nodes\Operation\ConfigOperation
 {
 	protected function lazy_get_properties()
 	{

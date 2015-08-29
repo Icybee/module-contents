@@ -9,10 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Operation;
 
 use ICanBoogie\Errors;
+use ICanBoogie\Module;
 use ICanBoogie\Operation;
+
+use Icybee\Modules\Contents\Content;
 
 /**
  * Includes a record is the home page.
