@@ -9,20 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Block;
 
 use Brickrouge\Document;
 
-use Icybee\ManageBlock\DateColumn;
+use Icybee\Block\ManageBlock\DateColumn;
+use Icybee\Modules\Contents as Root;
+use Icybee\Modules\Contents\Module;
 
-class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
+class ManageBlock extends \Icybee\Modules\Nodes\Block\ManageBlock
 {
 	static protected function add_assets(Document $document)
 	{
 		parent::add_assets($document);
 
-		$document->css->add(DIR . 'public/admin.css');
-		$document->js->add(DIR . 'public/admin.js');
+		$document->css->add(Root\DIR . 'public/admin.css');
+		$document->js->add(Root\DIR . 'public/admin.js');
 	}
 
 	public function __construct(Module $module, array $attributes = [])
@@ -67,7 +69,7 @@ class ManageBlock extends \Icybee\Modules\Nodes\ManageBlock
 	}
 }
 
-namespace Icybee\Modules\Contents\ManageBlock;
+namespace Icybee\Modules\Contents\Block\ManageBlock;
 
 use Brickrouge\Element;
 use Icybee\Modules\Contents\Content;
@@ -75,9 +77,9 @@ use Icybee\Modules\Contents\Content;
 /**
  * Representation of the `is_home_excluded` column.
  */
-class IsHomeExcludedColumn extends \Icybee\ManageBlock\BooleanColumn
+class IsHomeExcludedColumn extends \Icybee\Block\ManageBlock\BooleanColumn
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options = [])
+	public function __construct(\Icybee\Block\ManageBlock $manager, $id, array $options = [])
 	{
 		parent::__construct($manager, $id, $options + [
 
@@ -99,7 +101,7 @@ class IsHomeExcludedColumn extends \Icybee\ManageBlock\BooleanColumn
 /**
  * Renderer for the `is_home_excluded` column cell.
  */
-class IsHomeExcludedCellRenderer extends \Icybee\ManageBlock\BooleanCellRenderer
+class IsHomeExcludedCellRenderer extends \Icybee\Block\ManageBlock\BooleanCellRenderer
 {
 	/**
 	 * Returns a _boolean_ element representing a little house.

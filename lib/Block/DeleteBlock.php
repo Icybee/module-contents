@@ -9,14 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Block;
 
 use ICanBoogie\ActiveRecord;
+use Icybee\Modules\Contents\Content;
 
 /**
  * @property Content $record
  */
-class DeleteBlock extends \Icybee\Modules\Nodes\DeleteBlock
+class DeleteBlock extends \Icybee\Modules\Nodes\Block\DeleteBlock
 {
 	/**
 	 * @inheritdoc

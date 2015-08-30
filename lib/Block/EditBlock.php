@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Block;
 
 use Brickrouge\Element;
 use Brickrouge\Form;
 use Brickrouge\Text;
 
+use Icybee\Modules\Contents\Content;
 use Icybee\Modules\Editor\MultiEditorElement;
 
-class EditBlock extends \Icybee\Modules\Nodes\EditBlock
+class EditBlock extends \Icybee\Modules\Nodes\Block\EditBlock
 {
 	protected function lazy_get_attributes()
 	{

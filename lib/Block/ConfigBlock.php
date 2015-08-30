@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Block;
 
 use Brickrouge\Element;
 use Brickrouge\Group;
@@ -18,7 +18,7 @@ use Brickrouge\Text;
 /**
  * A block to configure contents.
  */
-class ConfigBlock extends \Icybee\ConfigBlock
+class ConfigBlock extends \Icybee\Block\ConfigBlock
 {
 	protected function lazy_get_attributes()
 	{
