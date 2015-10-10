@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Facets;
 
 use ICanBoogie\ActiveRecord\Query;
+use ICanBoogie\Facets\Criterion;
 
-class MonthCriterion extends \ICanBoogie\Facets\Criterion
+class MonthCriterion extends Criterion
 {
 	public function alter_query_with_value(Query $query, $value)
 	{

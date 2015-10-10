@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Facets;
 
 use ICanBoogie\ActiveRecord\Query;
+use ICanBoogie\Facets\Criterion;
 
-class DayCriterion extends \ICanBoogie\Facets\Criterion
+class YearCriterion extends Criterion
 {
 	public function alter_query_with_value(Query $query, $value)
 	{
 		// TODO-20140527: support Set and Interval
 
-		return $query->and('DAY(date) = ?', (int) $value);
+		return $query->and('YEAR(date) = ?', (int) $value);
 	}
 }

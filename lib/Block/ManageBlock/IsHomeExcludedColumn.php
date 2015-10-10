@@ -20,7 +20,7 @@ use Icybee\Modules\Contents\Content;
 /**
  * Representation of the `is_home_excluded` column.
  */
-class IsHomeExcludedColumn extends BooleanColumn
+class IsHomeExcludedColumn extends BooleanColumn implements ManageBlock\CriterionColumn
 {
 	public function __construct(ManageBlock $manager, $id, array $options = [])
 	{
@@ -32,6 +32,7 @@ class IsHomeExcludedColumn extends BooleanColumn
 
 					'=1' => "Excluded from home",
 					'=0' => "Included in home"
+
 				]
 			]
 

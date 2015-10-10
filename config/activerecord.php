@@ -1,6 +1,8 @@
 <?php
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Facets;
+
+use ICanBoogie\Facets\DateCriterion;
 
 return [
 
@@ -12,7 +14,7 @@ return [
 			'day' =>   DayCriterion::class,
 			'month' => MonthCriterion::class,
 			'year' =>  YearCriterion::class,
-			'in:home' => InHomeCriterion::class
+			'is_home_excluded' => IsHomeExcludedCriterion::class
 
 		]
 

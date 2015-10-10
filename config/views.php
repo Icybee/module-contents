@@ -20,7 +20,12 @@ return [
 
 		'list' => [
 
-			Options::ASSETS => $assets
+			Options::ASSETS => $assets,
+			Options::DEFAULT_CONDITIONS => [
+
+				'order' => '-date'
+
+			]
 
 		],
 
@@ -29,7 +34,13 @@ return [
 			Options::ASSETS => $assets,
 			Options::CONDITIONS => [
 
-				'in:home' => true
+				'is_home_excluded' => false
+
+			],
+
+			Options::DEFAULT_CONDITIONS => [
+
+				'order' => '-date'
 
 			]
 

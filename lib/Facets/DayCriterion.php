@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Contents;
+namespace Icybee\Modules\Contents\Facets;
 
 use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\Facets\Criterion;
 
-class InHomeCriterion extends Criterion
+class DayCriterion extends Criterion
 {
 	public function alter_query_with_value(Query $query, $value)
 	{
-		return $query->filter_by_is_home_excluded(!$value);
+		// TODO-20140527: support Set and Interval
+
+		return $query->and('DAY(date) = ?', (int) $value);
 	}
 }
