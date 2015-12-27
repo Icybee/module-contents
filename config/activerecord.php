@@ -2,7 +2,7 @@
 
 namespace Icybee\Modules\Contents\Facets;
 
-use ICanBoogie\Facets\DateCriterion;
+use ICanBoogie\Facets\Criterion\DateCriterion;
 
 return [
 

@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Contents\Facets;
 
-use ICanBoogie\Facets\BooleanCriterion;
+use ICanBoogie\Facets\Criterion\BooleanCriterion;
 use ICanBoogie\Facets\QueryString;
 
 class IsHomeExcludedCriterion extends BooleanCriterion
