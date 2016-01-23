@@ -4,10 +4,9 @@ return [
 
 	'connections' => [
 
-		'primary' => [
+		'primary' => 'sqlite::memory:',
+		'local' => 'sqlite::memory:'
 
-			'dsn' => 'sqlite::memory:'
-
-		]
 	]
+
 ];

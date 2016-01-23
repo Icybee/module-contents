@@ -177,6 +177,19 @@ class Content extends Node
 	}
 
 	/**
+	 * @inheritdoc
+	 */
+	public function create_validation_rules()
+	{
+		return parent::create_validation_rules() + [
+
+			'body' => 'required',
+			'is_home_excluded' => 'boolean',
+
+		];
+	}
+
+	/**
 	 * @var bool|null true is the cache should be used, false if the cache should not be used, and
 	 * null if we don't yet know if the cache should be used or not.
 	 */
