@@ -41,5 +41,4 @@ $app = new ICanBoogie\Core(ICanBoogie\array_merge_recursive(\ICanBoogie\get_auto
 ]));
 
 $app->boot();
-
-$errors = $app->modules->install(new ICanBoogie\Errors);
+$app->modules->install();
