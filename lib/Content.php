@@ -12,7 +12,7 @@
 namespace Icybee\Modules\Contents;
 
 use ICanBoogie\ActiveRecord;
-use ICanBoogie\ActiveRecord\DateTimePropertySupport;
+use ICanBoogie\ActiveRecord\Property\DateTimePropertySupport;
 use ICanBoogie\Facets\RecordCollection;
 use Icybee\Modules\Editor\Editor;
 use Icybee\Modules\Nodes\Node;

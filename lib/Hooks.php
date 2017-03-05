@@ -110,7 +110,7 @@ class Hooks
 	}
 
 	/**
-	 * @return \ICanBoogie\Core|\ICanBoogie\Binding\ActiveRecord\CoreBindings
+	 * @return \ICanBoogie\Application
 	 */
 	static private function app()
 	{

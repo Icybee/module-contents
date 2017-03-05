@@ -1,4 +1,4 @@
-# The Contents module [![Build Status](https://travis-ci.org/Icybee/module-contents.png?branch=2.0)](https://travis-ci.org/Icybee/module-contents)
+# The Contents module [![Build Status](https://travis-ci.org/Icybee/module-contents.png)](https://travis-ci.org/Icybee/module-contents)
 
 The Contents module (`contents`) is the base module for content nodes such as articles or
 news. If extends nodes with a body, an excerpt, a subtitle, a date and an additionnal visibility
@@ -13,7 +13,7 @@ module that allows the user to control the cache.
 
 ## Requirement
 
-The package requires PHP 5.4 or later.
+The package requires PHP 5.6 or later.
 
 
 
@@ -24,14 +24,8 @@ The package requires PHP 5.4 or later.
 The recommended way to install this package is through [Composer](http://getcomposer.org/).
 Create a `composer.json` file and run `php composer.phar install` command to install it:
 
-```json
-{
-	"minimum-stability": "dev",
-	"require":
-	{
-		"icybee/module-contents": "2.x"
-	}
-}
+```
+$ composer require icybee/module-contents
 ```
 
 Note: The module is part of the modules required by Icybee.
@@ -71,7 +65,7 @@ directory can later be cleaned with the `make clean` command.
 
 The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
-[![Build Status](https://travis-ci.org/Icybee/module-contents.png?branch=2.0)](https://travis-ci.org/Icybee/module-contents)
+[![Build Status](https://travis-ci.org/Icybee/module-contents.png)](https://travis-ci.org/Icybee/module-contents)
 
 
 

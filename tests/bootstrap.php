@@ -9,7 +9,11 @@
  * file that was distributed with this source code.
  */
 
+namespace ICanBoogie;
+
 $_SERVER['DOCUMENT_ROOT'] = __DIR__;
+
+chdir(__DIR__);
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -24,21 +28,5 @@ if (!function_exists('ICanBoogie\excerpt'))
 	}
 }
 
-$app = new ICanBoogie\Core(ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(), [
-
-	'config-path' => [
-
-		__DIR__ . DIRECTORY_SEPARATOR . 'config' => 10
-
-	],
-
-	'module-path' => [
-
-		dirname(__DIR__)
-
-	]
-
-]));
-
-$app->boot();
+$app = boot();
 $app->modules->install();

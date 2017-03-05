@@ -18,7 +18,7 @@ use ICanBoogie\ActiveRecord;
  */
 class Rendered extends ActiveRecord
 {
-	use ActiveRecord\UpdatedAtProperty;
+	use ActiveRecord\Property\UpdatedAtProperty;
 
 	/**
 	 * The identifier of the associated content record.

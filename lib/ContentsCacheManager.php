@@ -28,7 +28,7 @@ class ContentsCacheManager implements CacheManager
 	public $config_preview;
 
 	/**
-	 * @var \ICanBoogie\Core|\Icybee\Binding\CoreBindings
+	 * @var \ICanBoogie\Application
 	 */
 	private $app;
 
