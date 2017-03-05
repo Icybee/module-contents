@@ -7,6 +7,7 @@ use ICanBoogie\Module\Descriptor;
 
 return [
 
+	Descriptor::ID => 'contents',
 	Descriptor::CATEGORY => 'contents',
 	Descriptor::DESCRIPTION => "Base module for content nodes such as articles or news.",
 	Descriptor::INHERITS => 'nodes',
