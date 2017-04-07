@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Contents;
 
-use ICanBoogie\I18n;
+use function ICanBoogie\app;
 use Icybee\Modules\Cache\CacheManager;
 
 /**
@@ -34,7 +34,7 @@ class ContentsCacheManager implements CacheManager
 
 	public function __construct()
 	{
-		$this->app = \ICanBoogie\app();
+		$this->app = app();
 		$this->state = !empty($this->app->registry['contents.cache_rendered_body']);
 	}
 

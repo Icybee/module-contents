@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Contents;
 
+use function ICanBoogie\app;
 use ICanBoogie\ActiveRecord;
 use ICanBoogie\ActiveRecord\Property\DateTimePropertySupport;
 use ICanBoogie\Facets\RecordCollection;
@@ -206,7 +207,7 @@ class Content extends Node
 			return self::$cache_model;
 		}
 
-		$app = \ICanBoogie\app();
+		$app = app();
 
 		if (self::$use_cache === null)
 		{

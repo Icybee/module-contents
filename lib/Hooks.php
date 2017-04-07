@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Contents;
 
+use function ICanBoogie\app;
 use ICanBoogie\ActiveRecord\RecordNotFound;
 use ICanBoogie\HTTP\ForceRedirect;
 
@@ -44,7 +45,7 @@ class Hooks
 	 */
 	static public function on_file_move(File\MoveEvent $event, File $target)
 	{
-		self::app()->models['contents']->execute
+		app()->models['contents']->execute
 		(
 			'UPDATE {self} SET `body` = REPLACE(`body`, ?, ?)', [ $event->from, $event->to ]
 		);
@@ -107,13 +108,5 @@ class Hooks
 
 			throw new ForceRedirect($record->url, 301);
 		}
-	}
-
-	/**
-	 * @return \ICanBoogie\Application
-	 */
-	static private function app()
-	{
-		return \ICanBoogie\app();
 	}
 }
